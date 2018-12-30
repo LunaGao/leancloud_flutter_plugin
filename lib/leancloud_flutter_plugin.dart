@@ -10,4 +10,9 @@ class LeancloudFlutterPlugin {
     final String version = await _channel.invokeMethod('getPlatformVersion');
     return version;
   }
+
+  static initialize(String appId, String appKey) {
+
+    _channel.invokeMethod('initialize');
+  }
 }
