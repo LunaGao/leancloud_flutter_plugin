@@ -35,6 +35,9 @@ public class LeancloudFlutterPlugin implements MethodCallHandler {
       case "delete":
         LeancloudObject.delete(call, result);
         break;
+      case "query":
+        LeancloudQuery.query(call, result);
+        break;
       default:
         result.notImplemented();
     }

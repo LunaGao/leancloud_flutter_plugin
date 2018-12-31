@@ -16,6 +16,7 @@ class LeancloudObject {
         String avObject_string = LeancloudArgsConverter.getStringValue(call, result, "avObject");
         AVObject avObject = LeancloudObjectConverter.convertStringToAVObject(avObject_string);
         avObject.save();
+        result.success(avObject.getObjectId());
     }
 
     /**
