@@ -7,6 +7,12 @@ import cn.leancloud.AVObject;
 
 class LeancloudObjectConverter {
 
+    /**
+     * convert String to AVObject
+     *
+     * @param avObjectString flutter object json string
+     * @return AVObject
+     */
     static AVObject convertStringToAVObject(String avObjectString) {
         JSONObject avObjectJson = JSON.parseObject(avObjectString);
         String className = avObjectJson.getString("className");

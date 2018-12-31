@@ -3,6 +3,7 @@ package com.example.leancloudflutterplugin;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import cn.leancloud.AVObject;
@@ -10,7 +11,16 @@ import cn.leancloud.AVQuery;
 
 class LeancloudQueryConverter {
 
-    static AVQuery<AVObject> convertStringToAVObject(String avQueryString) throws Exception {
+    /**
+     * convert String to AVQuery
+     * @param avQueryString flutter query json String
+     * @return AVQuery
+     * @throws NoSuchMethodException no such method
+     * @throws IllegalAccessException illegal access
+     * @throws InvocationTargetException invocation target
+     */
+    static AVQuery<AVObject> convertStringToAVObject(String avQueryString)
+            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         JSONObject avQueryJson = JSON.parseObject(avQueryString);
         String className = avQueryJson.getString("className");
         AVQuery<AVObject> avQuery = new AVQuery<>(className);
