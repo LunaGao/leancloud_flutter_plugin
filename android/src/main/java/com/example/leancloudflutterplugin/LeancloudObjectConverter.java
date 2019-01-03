@@ -16,11 +16,13 @@ class LeancloudObjectConverter {
     static AVObject convertStringToAVObject(String avObjectString) {
         JSONObject avObjectJson = JSON.parseObject(avObjectString);
         String className = avObjectJson.getString("className");
+        String fieldsString = avObjectJson.getString("fields");
+        JSONObject fieldsJson = JSON.parseObject(fieldsString);
         AVObject avObject = new AVObject(className);
-        for (String key : avObjectJson.keySet()) {
+        for (String key : fieldsJson.keySet()) {
             //TODO if those value is Date or byte[] type?
             //TODO more data type? e.g. AVGeoPoint？
-            avObject.put(key, avObjectJson.get(key));
+            avObject.put(key, fieldsJson.get(key));
         }
         return avObject;
     }

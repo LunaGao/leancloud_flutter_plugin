@@ -8,11 +8,12 @@ void main() {
   runApp(MyApp());
 }
 
-void initPlatformState() async {
+void initPlatformState() {
   String appId = "";
   String appKey = "";
-  await LeancloudFlutterPlugin.setLogLevel(6);
-  await LeancloudFlutterPlugin.initialize(appId, appKey);
+  LeancloudFlutterPlugin.setLogLevel(4);
+  LeancloudFlutterPlugin.setRegion(0);
+  LeancloudFlutterPlugin.initialize(appId, appKey);
 }
 
 class MyApp extends StatefulWidget {
@@ -21,6 +22,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
+
 
   @override
   Widget build(BuildContext context) {

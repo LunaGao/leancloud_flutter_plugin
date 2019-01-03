@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 
+import 'package:leancloud_flutter_plugin/leancloud_object.dart';
+
 class LeancloudFlutterPlugin {
   static const MethodChannel _channel =
       const MethodChannel('leancloud_flutter_plugin');
@@ -11,12 +13,12 @@ class LeancloudFlutterPlugin {
     return version;
   }
 
-  static Future<void> initialize(String appId, String appKey) async {
+  static initialize(String appId, String appKey) {
     Map args = <String, dynamic>{
       'appId': appId,
       'appKey': appKey,
     };
-    await _channel.invokeMethod('initialize', args);
+    _channel.invokeMethod('initialize', args);
   }
 
   //
@@ -25,11 +27,11 @@ class LeancloudFlutterPlugin {
   // The call must be include args:
   //  level  --> OFF(0), ERROR(1), WARNING(2), INFO(3), DEBUG(4), VERBOSE(5), ALL(6);
   //
-  static Future<void> setLogLevel(int level) async {
+  static setLogLevel(int level) {
     Map args = <String, dynamic>{
       'level': level,
     };
-    await _channel.invokeMethod('setLogLevel', args);
+    _channel.invokeMethod('setLogLevel', args);
   }
 
   //
@@ -48,8 +50,14 @@ class LeancloudFlutterPlugin {
     _channel.invokeMethod('setRegion', args);
   }
 
-  static saveOrCreate() {
-    _channel.invokeMethod('saveOrCreate');
+  //
+  // save object
+  //
+  static Future<void> saveOrCreate(AVObject object) async {
+    Map args = <String, dynamic>{
+      'avObject': object.toString()
+    };
+    await _channel.invokeMethod('saveOrCreate', args);
   }
 
   static delete() {

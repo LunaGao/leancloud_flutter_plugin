@@ -3,6 +3,8 @@ package com.example.leancloudflutterplugin;
 import cn.leancloud.AVObject;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 class LeancloudObject {
 
@@ -12,11 +14,22 @@ class LeancloudObject {
      * @param call MethodCall from LeancloudFlutterPlugin.onMethodCall function
      * @param result MethodChannel.Result from LeancloudFlutterPlugin.onMethodCall function
      */
-    static void saveOrCreate(MethodCall call, MethodChannel.Result result) {
+    static void saveOrCreate(MethodCall call, final MethodChannel.Result result) {
         String avObject_string = LeancloudArgsConverter.getStringValue(call, result, "avObject");
         AVObject avObject = LeancloudObjectConverter.convertStringToAVObject(avObject_string);
-        avObject.save();
-        result.success(avObject.getObjectId());
+        avObject.saveInBackground().subscribe(new Observer<AVObject>() {
+            public void onSubscribe(Disposable disposable) {}
+
+            public void onNext(AVObject avObject) {
+                result.success(avObject.getObjectId());
+            }
+
+            public void onError(Throwable throwable) {
+                result.error(throwable.getMessage(), null, null);
+            }
+
+            public void onComplete() {}
+        });
     }
 
     /**
