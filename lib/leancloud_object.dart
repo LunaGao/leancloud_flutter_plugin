@@ -1,5 +1,6 @@
-
 import 'dart:convert';
+
+import 'package:leancloud_flutter_plugin/leancloud_flutter_plugin.dart';
 
 class AVObject {
 
@@ -21,5 +22,19 @@ class AVObject {
     object.addAll({"className": className});
     object.addAll({"fields": fieldsString});
     return jsonEncode(object);
+  }
+
+  Future<AVObject> save() async {
+    LeancloudFlutterPlugin leancloudFlutterPlugin = LeancloudFlutterPlugin.getInstance();
+    String objectString = await leancloudFlutterPlugin.saveOrCreate(this);
+    _addSystemFields(objectString);
+    return this;
+  }
+
+  void _addSystemFields(String objectString) {
+    Map<String, Object> systemFields = jsonDecode(objectString);
+    systemFields.forEach((key, value) {
+      this.put(key, value);
+    });
   }
 }

@@ -21,7 +21,7 @@ class LeancloudObject {
             public void onSubscribe(Disposable disposable) {}
 
             public void onNext(AVObject avObject) {
-                result.success(avObject.getObjectId());
+                result.success(avObject.toJSONObject().toJSONString());
             }
 
             public void onError(Throwable throwable) {

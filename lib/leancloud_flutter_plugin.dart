@@ -8,12 +8,15 @@ class LeancloudFlutterPlugin {
   static const MethodChannel _channel =
       const MethodChannel('leancloud_flutter_plugin');
 
-  static Future<String> get platformVersion async {
-    final String version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
+  static LeancloudFlutterPlugin _instancePlugin = new LeancloudFlutterPlugin();
+
+  static LeancloudFlutterPlugin getInstance() {
+    return _instancePlugin;
   }
 
-  static initialize(String appId, String appKey) {
+  int logLevel = 0;
+
+  void initialize(String appId, String appKey) {
     Map args = <String, dynamic>{
       'appId': appId,
       'appKey': appKey,
@@ -27,7 +30,8 @@ class LeancloudFlutterPlugin {
   // The call must be include args:
   //  level  --> OFF(0), ERROR(1), WARNING(2), INFO(3), DEBUG(4), VERBOSE(5), ALL(6);
   //
-  static setLogLevel(int level) {
+  void setLogLevel(int level) {
+    this.logLevel = level;
     Map args = <String, dynamic>{
       'level': level,
     };
@@ -43,7 +47,7 @@ class LeancloudFlutterPlugin {
   //      REGION.EastChina
   //      REGION.NorthAmerica
   //
-  static setRegion(int region) {
+  void setRegion(int region) {
     Map args = <String, dynamic>{
       'region': region,
     };
@@ -53,11 +57,15 @@ class LeancloudFlutterPlugin {
   //
   // save object
   //
-  static Future<void> saveOrCreate(AVObject object) async {
+  Future<String> saveOrCreate(AVObject object) async {
     Map args = <String, dynamic>{
       'avObject': object.toString()
     };
-    await _channel.invokeMethod('saveOrCreate', args);
+    String objectString = await _channel.invokeMethod('saveOrCreate', args);
+    if (this.logLevel != 0) {
+      print("[saveOrCreate function] -> " + objectString);
+    }
+    return objectString;
   }
 
   static delete() {

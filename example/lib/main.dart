@@ -9,11 +9,12 @@ void main() {
 }
 
 void initPlatformState() {
-  String appId = "";
-  String appKey = "";
-  LeancloudFlutterPlugin.setLogLevel(4);
-  LeancloudFlutterPlugin.setRegion(0);
-  LeancloudFlutterPlugin.initialize(appId, appKey);
+  LeancloudFlutterPlugin leancloudFlutterPlugin = LeancloudFlutterPlugin.getInstance();
+  String appId = "YOUR_APP_ID";
+  String appKey = "YOUR_APP_KEY";
+  leancloudFlutterPlugin.setLogLevel(4);
+  leancloudFlutterPlugin.setRegion(0);
+  leancloudFlutterPlugin.initialize(appId, appKey);
 }
 
 class MyApp extends StatefulWidget {

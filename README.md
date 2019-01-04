@@ -12,7 +12,54 @@ Developing by IntelliJ IDEA.
 
 Not yet...
 
+### How to use
+Before your `runApp` function, initialize the leancloud. Such as the `example` app does.
+
+**Steps:** 
+* initialize plugin
+* setup log level *(Optional, default value is `OFF`)*
+* setup region *(Optional, default value is `NorthChina`)*
+* initialize leancloud
+* save object or you can do whet ever you want :)
+
+#### Initialize plugin
+Plugin is *Singleton mode*. Please **NOT** initialize it by yourself.
+```
+LeancloudFlutterPlugin leancloudFlutterPlugin = LeancloudFlutterPlugin.getInstance();
+```
+#### Log Level *(Optional)*
+Setup log level must be before call **initialize leancloud** function.
+```
+leancloudFlutterPlugin.setLogLevel(4);
+```
+#### Region *(Optional)*
+Setup region must be before call **initialize leancloud** function.
+```
+leancloudFlutterPlugin.setRegion(0);
+```
+#### Initialize Leancloud
+```
+leancloudFlutterPlugin.initialize(appId, appKey);
+```
+#### Save or Create an Object
+```
+AVObject object = new AVObject("YOUR_OBJECT");
+object.put("FIELD_NAME", "VALUE"); // String
+object.put("OR_INT", 10); // int
+object.put("OR_BOOLEAN", true); // boolean
+object.put("OR_FLOAT", 10.01); // float
+object.save().then((object) {
+  print(object);
+});
+```
+
 ### Example
+
+#### Setup AppID and AppKey
+I don't have an appId or an appKey. Please click [here](https://leancloud.cn/docs/start.html)
+* open `example/lib/main.dart` file.
+* replace `YOUR_APP_ID` to your appId.
+* replace `YOUR_APP_KEY` to your appKey.
 
 #### Android
 According [Flutter document](https://flutter.io/docs/development/packages-and-plugins/developing-packages#step-2b-add-android-platform-code-javakt)
@@ -43,12 +90,14 @@ flutter build ios --no-codesign
 ```
 {
     "className" : "CLASS NAME VALUE",
-    "objectId" : "XXXXXXXXXXXXXXXXXXXXXXXX",
-    "ACL" : "XXXXXXXXXXXXX",
-    "createdAt" : "XXXXXXXXXXXXXXX",
-    "updatedAt" : "XXXXXXXXXXXXXXX",
-    "YOUR FIELD" : "YOUR FIELD VALUE",
-    ...
+    "fields": [
+        "objectId" : "XXXXXXXXXXXXXXXXXXXXXXXX",
+        "ACL" : "XXXXXXXXXXXXX",
+        "createdAt" : "XXXXXXXXXXXXXXX",
+        "updatedAt" : "XXXXXXXXXXXXXXX",
+        "YOUR FIELD" : "YOUR FIELD VALUE",
+        ...
+    ]
 }
 ```
 
