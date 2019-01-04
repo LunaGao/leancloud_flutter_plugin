@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:leancloud_flutter_plugin/leancloud_object.dart';
-import 'package:leancloud_flutter_plugin/leancloud_flutter_plugin.dart';
 
 class ListScreen extends StatefulWidget {
   @override
@@ -10,14 +9,16 @@ class ListScreen extends StatefulWidget {
 
 class _ListScreenState extends State<ListScreen> {
 
-  _createAnObject() async {
+  _createAnObject() {
     AVObject object = new AVObject("DemoObject");
     object.put("description", "come from flutter plugin on Android");
     object.put("value", "int->10, boolean->true, float->10.01, ");
     object.put("int_value", 10);
     object.put("boolean_value", true);
     object.put("float", 10.01);
-    await LeancloudFlutterPlugin.saveOrCreate(object);
+    object.save().then((object) {
+      print(object);
+    });
   }
 
   @override

@@ -1,5 +1,7 @@
 package com.example.leancloudflutterplugin;
 
+import android.content.Context;
+
 import cn.leancloud.AVLogger;
 import cn.leancloud.AVOSCloud;
 import io.flutter.plugin.common.MethodCall;
@@ -17,10 +19,10 @@ class LeancloudFunction {
      * @param call MethodCall from LeancloudFlutterPlugin.onMethodCall function
      * @param result MethodChannel.Result from LeancloudFlutterPlugin.onMethodCall function
      */
-    static void initialize(MethodCall call, MethodChannel.Result result) {
+    static void initialize(MethodCall call, MethodChannel.Result result, Context context) {
         String appId = LeancloudArgsConverter.getStringValue(call, result, "appId");
         String appKey = LeancloudArgsConverter.getStringValue(call, result, "appKey");
-        AVOSCloud.initialize(appId, appKey);
+        AVOSCloud.initialize(context, appId, appKey);
     }
 
     /**

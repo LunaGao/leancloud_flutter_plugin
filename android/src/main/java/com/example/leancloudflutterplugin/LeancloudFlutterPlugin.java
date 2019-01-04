@@ -1,5 +1,7 @@
 package com.example.leancloudflutterplugin;
 
+import android.content.Context;
+
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -8,10 +10,14 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /** LeancloudFlutterPlugin */
 public class LeancloudFlutterPlugin implements MethodCallHandler {
+
+  private static Context _applicationContext;
+
   /** Plugin registration. */
   public static void registerWith(Registrar registrar) {
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "leancloud_flutter_plugin");
     channel.setMethodCallHandler(new LeancloudFlutterPlugin());
+    _applicationContext = registrar.context().getApplicationContext();
   }
 
   @Override
@@ -21,7 +27,7 @@ public class LeancloudFlutterPlugin implements MethodCallHandler {
         result.success("Android " + android.os.Build.VERSION.RELEASE);
         break;
       case "initialize":
-        LeancloudFunction.initialize(call, result);
+        LeancloudFunction.initialize(call, result, _applicationContext);
         break;
       case "setLogLevel":
         LeancloudFunction.setLogLevel(call, result);
