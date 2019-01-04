@@ -24,24 +24,29 @@ Before your `runApp` function, initialize the leancloud. Such as the `example` a
 
 #### Initialize plugin
 Plugin is *Singleton mode*. Please **NOT** initialize it by yourself.
+
+Import: `import 'package:leancloud_flutter_plugin/leancloud_flutter_plugin.dart';`
+
 ```
 LeancloudFlutterPlugin leancloudFlutterPlugin = LeancloudFlutterPlugin.getInstance();
 ```
 #### Log Level *(Optional)*
 Setup log level must be before call **initialize leancloud** function.
 ```
-leancloudFlutterPlugin.setLogLevel(4);
+leancloudFlutterPlugin.setLogLevel(LeancloudLoggerLevel.DEBUG);
 ```
 #### Region *(Optional)*
 Setup region must be before call **initialize leancloud** function.
 ```
-leancloudFlutterPlugin.setRegion(0);
+leancloudFlutterPlugin.setRegion(LeancloudCloudRegion.NorthChina);
 ```
 #### Initialize Leancloud
 ```
 leancloudFlutterPlugin.initialize(appId, appKey);
 ```
 #### Save or Create an Object
+Import: `import 'package:leancloud_flutter_plugin/leancloud_object.dart';`
+
 ```
 AVObject object = new AVObject("YOUR_OBJECT");
 object.put("FIELD_NAME", "VALUE"); // String
@@ -56,7 +61,7 @@ object.save().then((object) {
 ### Example
 
 #### Setup AppID and AppKey
-I don't have an appId or an appKey. Please click [here](https://leancloud.cn/docs/start.html)
+"Oh, I don't have an appId or an appKey." Please click [here](https://leancloud.cn/docs/start.html)
 * open `example/lib/main.dart` file.
 * replace `YOUR_APP_ID` to your appId.
 * replace `YOUR_APP_KEY` to your appKey.

@@ -30,10 +30,32 @@ class LeancloudFlutterPlugin {
   // The call must be include args:
   //  level  --> OFF(0), ERROR(1), WARNING(2), INFO(3), DEBUG(4), VERBOSE(5), ALL(6);
   //
-  void setLogLevel(int level) {
-    this.logLevel = level;
+  void setLogLevel(LeancloudLoggerLevel level) {
+    switch (level) {
+      case LeancloudLoggerLevel.OFF:
+        this.logLevel = 0;
+        break;
+      case LeancloudLoggerLevel.ERROR:
+        this.logLevel = 1;
+        break;
+      case LeancloudLoggerLevel.WARNING:
+        this.logLevel = 2;
+        break;
+      case LeancloudLoggerLevel.INFO:
+        this.logLevel = 3;
+        break;
+      case LeancloudLoggerLevel.DEBUG:
+        this.logLevel = 4;
+        break;
+      case LeancloudLoggerLevel.VERBOSE:
+        this.logLevel = 5;
+        break;
+      case LeancloudLoggerLevel.ALL:
+        this.logLevel = 6;
+        break;
+    }
     Map args = <String, dynamic>{
-      'level': level,
+      'level': this.logLevel,
     };
     _channel.invokeMethod('setLogLevel', args);
   }
@@ -47,9 +69,21 @@ class LeancloudFlutterPlugin {
   //      REGION.EastChina
   //      REGION.NorthAmerica
   //
-  void setRegion(int region) {
+  void setRegion(LeancloudCloudRegion region) {
+    int regionValue;
+    switch (region) {
+      case LeancloudCloudRegion.NorthChina:
+        regionValue = 0;
+        break;
+      case LeancloudCloudRegion.EastChina:
+        regionValue = 1;
+        break;
+      case LeancloudCloudRegion.NorthAmerica:
+        regionValue = 2;
+        break;
+    }
     Map args = <String, dynamic>{
-      'region': region,
+      'region': regionValue,
     };
     _channel.invokeMethod('setRegion', args);
   }
@@ -58,9 +92,7 @@ class LeancloudFlutterPlugin {
   // save object
   //
   Future<String> saveOrCreate(AVObject object) async {
-    Map args = <String, dynamic>{
-      'avObject': object.toString()
-    };
+    Map args = <String, dynamic>{'avObject': object.toString()};
     String objectString = await _channel.invokeMethod('saveOrCreate', args);
     if (this.logLevel != 0) {
       print("[saveOrCreate function] -> " + objectString);
@@ -71,7 +103,13 @@ class LeancloudFlutterPlugin {
   static delete() {
     _channel.invokeMethod('delete');
   }
+
   static query() {
     _channel.invokeMethod('query');
   }
 }
+
+
+enum LeancloudLoggerLevel { OFF, ERROR, WARNING, INFO, DEBUG, VERBOSE, ALL }
+
+enum LeancloudCloudRegion { NorthChina, EastChina, NorthAmerica }
