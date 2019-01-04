@@ -9,15 +9,27 @@ class ListScreen extends StatefulWidget {
 
 class _ListScreenState extends State<ListScreen> {
 
+  AVObject _updateObject;
+
   _createAnObject() {
     AVObject object = new AVObject("DemoObject");
-    object.put("description", "come from flutter plugin on Android");
+    object.put("description", "created!");
     object.put("value", "int->10, boolean->true, float->10.01, ");
     object.put("int_value", 10);
     object.put("boolean_value", true);
     object.put("float", 10.01);
     object.save().then((object) {
+      _updateObject = object;
       print(object);
+      setState(() { });
+    });
+  }
+
+  _saveObject() {
+    _updateObject.put("description", "updated!");
+    _updateObject.save().then((object) {
+      print(object);
+      setState(() { });
     });
   }
 
@@ -35,10 +47,14 @@ class _ListScreenState extends State<ListScreen> {
                 onPressed: _createAnObject,
                 child: Text('create an Object'),
               ),
-              const Text('I\'m dedicating every day to you'),
-              const Text('Domestic life was never quite my style'),
-              const Text('When you smile, you knock me out, I fall apart'),
-              const Text('And I thought I was so smart'),
+              FlatButton(
+                onPressed: _saveObject,
+                child: Text('save the Object'),
+              ),
+              Text(_updateObject == null
+                  ? "Please click 'create an Object' button"
+                  : (_updateObject.get("description") == null
+                  ? "ERROR" : _updateObject.get("description"))),
             ],
           )
     );

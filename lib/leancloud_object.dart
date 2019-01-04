@@ -16,6 +16,10 @@ class AVObject {
     fields.addAll({key: value});
   }
 
+  dynamic get(String key) {
+    return fields[key];
+  }
+
   String toString() {
     String fieldsString = jsonEncode(fields);
     Map<String, String> object = new Map();

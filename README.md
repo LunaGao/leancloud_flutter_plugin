@@ -31,12 +31,12 @@ Import: `import 'package:leancloud_flutter_plugin/leancloud_flutter_plugin.dart'
 LeancloudFlutterPlugin leancloudFlutterPlugin = LeancloudFlutterPlugin.getInstance();
 ```
 #### Log Level *(Optional)*
-Setup log level must be before call **initialize leancloud** function.
+Setup log level must be earlier than **initialize leancloud** function.
 ```
 leancloudFlutterPlugin.setLogLevel(LeancloudLoggerLevel.DEBUG);
 ```
 #### Region *(Optional)*
-Setup region must be before call **initialize leancloud** function.
+Setup region must be earlier than **initialize leancloud** function.
 ```
 leancloudFlutterPlugin.setRegion(LeancloudCloudRegion.NorthChina);
 ```
@@ -44,51 +44,35 @@ leancloudFlutterPlugin.setRegion(LeancloudCloudRegion.NorthChina);
 ```
 leancloudFlutterPlugin.initialize(appId, appKey);
 ```
-#### Save or Create an Object
+#### Create and update an Object
 Import: `import 'package:leancloud_flutter_plugin/leancloud_object.dart';`
 
 ```
+// Create
 AVObject object = new AVObject("YOUR_OBJECT");
 object.put("FIELD_NAME", "VALUE"); // String
 object.put("OR_INT", 10); // int
 object.put("OR_BOOLEAN", true); // boolean
 object.put("OR_FLOAT", 10.01); // float
 object.save().then((object) {
+  // Saved
   print(object);
-});
-```
-
-### Example
-
-#### Setup AppID and AppKey
-"Oh, I don't have an appId or an appKey." Please click [here](https://leancloud.cn/docs/start.html)
-* open `example/lib/main.dart` file.
-* replace `YOUR_APP_ID` to your appId.
-* replace `YOUR_APP_KEY` to your appKey.
-
-#### Android
-According [Flutter document](https://flutter.io/docs/development/packages-and-plugins/developing-packages#step-2b-add-android-platform-code-javakt)
-* Run flutter build command
-```
-cd example
-flutter build apk
-```
-* Launch Android Studio.
-* Select `Import project` in `Welcome to Android Studio` dialog, or select `File > New > Import Project…` in the menu, and select the `example/android/build.gradle` file.
-* In the `Gradle Sync` dialog, select `OK`.
-* In the `Android Gradle Plugin Update` dialog, select `Don’t remind me again for this project`.
-* Run this example app from Android Studio by pressing the ▶ button.
   
-#### iOS
-According [Flutter document](https://flutter.io/docs/development/packages-and-plugins/developing-packages#step-2c-add-ios-platform-code-hmswift)
-* Run flutter build command.
+  // and Update
+  object.put("description", "updated!");
+  object.save().then((object) {
+    // Updated
+    print(object);
+  });
+});
+
 ```
-cd example
-flutter build ios --no-codesign
-```
-* Launch Xcode.
-* Select `File > Open`, and select the `example/ios/Runner.xcworkspace` file.
-* Run this example app by pressing the ▶ button.
+If your update your object, `{"code":403,"error":"Forbidden writing by object's ACL."}` happened, 
+then please check leancloud data's ACL field. 
+
+## Example App
+
+[Example App README.md](https://github.com/LunaGao/leancloud_flutter_plugin/blob/master/example/README.md)
 
 ## Entity to Json in Flutter
 * AVObject ( The entity is not stable. )
