@@ -35,6 +35,12 @@ class AVObject {
     return this;
   }
 
+  Future<bool> delete() async {
+    LeancloudFlutterPlugin leancloudFlutterPlugin = LeancloudFlutterPlugin.getInstance();
+    bool isDeleted = await leancloudFlutterPlugin.delete(this);
+    return isDeleted;
+  }
+
   void _addSystemFields(String objectString) {
     Map<String, Object> systemFields = jsonDecode(objectString);
     systemFields.forEach((key, value) {

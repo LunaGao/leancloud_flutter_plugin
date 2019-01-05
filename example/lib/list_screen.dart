@@ -9,7 +9,7 @@ class ListScreen extends StatefulWidget {
 
 class _ListScreenState extends State<ListScreen> {
 
-  AVObject _updateObject;
+  AVObject _theObject;
 
   _createAnObject() {
     AVObject object = new AVObject("DemoObject");
@@ -19,17 +19,27 @@ class _ListScreenState extends State<ListScreen> {
     object.put("boolean_value", true);
     object.put("float", 10.01);
     object.save().then((object) {
-      _updateObject = object;
+      _theObject = object;
       print(object);
       setState(() { });
     });
   }
 
-  _saveObject() {
-    _updateObject.put("description", "updated!");
-    _updateObject.save().then((object) {
+  _updateObject() {
+    _theObject.put("description", "updated!");
+    _theObject.save().then((object) {
       print(object);
       setState(() { });
+    });
+  }
+
+  _deleteObject() {
+    _theObject.delete().then((isDeleted) {
+      if (isDeleted) {
+        print("Deleted!");
+        _theObject = null;
+        setState(() { });
+      }
     });
   }
 
@@ -43,18 +53,22 @@ class _ListScreenState extends State<ListScreen> {
             shrinkWrap: true,
             padding: const EdgeInsets.all(20.0),
             children: <Widget>[
+              Text(_theObject == null
+                  ? "Please click 'create an Object' button"
+                  : (_theObject.get("description") == null
+                  ? "ERROR" : _theObject.get("description"))),
               FlatButton(
                 onPressed: _createAnObject,
                 child: Text('create an Object'),
               ),
               FlatButton(
-                onPressed: _saveObject,
-                child: Text('save the Object'),
+                onPressed: _updateObject,
+                child: Text('update the Object'),
               ),
-              Text(_updateObject == null
-                  ? "Please click 'create an Object' button"
-                  : (_updateObject.get("description") == null
-                  ? "ERROR" : _updateObject.get("description"))),
+              FlatButton(
+                onPressed: _deleteObject,
+                child: Text('delete the Object'),
+              ),
             ],
           )
     );

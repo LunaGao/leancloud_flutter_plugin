@@ -2,6 +2,10 @@
 
 ## Getting Started
 
+### Setup Leancloud Data
+* Create an Class named `DemoObject`
+* Set ACL to unlimited (`无限制`). _**(This is important because if the Class is limited, we can't update or delete any object. It's not a bug, it's leancloud design for security.)**_
+
 ### Setup AppID and AppKey
 "Oh, I don't have an appId or an appKey." Please click [here](https://leancloud.cn/docs/start.html)
 * open `example/lib/main.dart` file.

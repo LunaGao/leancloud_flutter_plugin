@@ -88,9 +88,7 @@ class LeancloudFlutterPlugin {
     _channel.invokeMethod('setRegion', args);
   }
 
-  //
   // save object
-  //
   Future<String> saveOrCreate(AVObject object) async {
     Map args = <String, dynamic>{'avObject': object.toString()};
     String objectString = await _channel.invokeMethod('saveOrCreate', args);
@@ -100,8 +98,10 @@ class LeancloudFlutterPlugin {
     return objectString;
   }
 
-  static delete() {
-    _channel.invokeMethod('delete');
+  // delete object
+  Future<bool> delete(AVObject object) async {
+    Map args = <String, dynamic>{'avObject': object.toString()};
+    return await _channel.invokeMethod('delete', args);
   }
 
   static query() {

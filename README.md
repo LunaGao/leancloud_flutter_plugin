@@ -70,43 +70,17 @@ object.save().then((object) {
 If your update your object, `{"code":403,"error":"Forbidden writing by object's ACL."}` happened, 
 then please check leancloud data's ACL field. 
 
-## Example App
-
-[Example App README.md](https://github.com/LunaGao/leancloud_flutter_plugin/blob/master/example/README.md)
-
-## Entity to Json in Flutter
-* AVObject ( The entity is not stable. )
+#### Delete an Object
 ```
-{
-    "className" : "CLASS NAME VALUE",
-    "fields": [
-        "objectId" : "XXXXXXXXXXXXXXXXXXXXXXXX",
-        "ACL" : "XXXXXXXXXXXXX",
-        "createdAt" : "XXXXXXXXXXXXXXX",
-        "updatedAt" : "XXXXXXXXXXXXXXX",
-        "YOUR FIELD" : "YOUR FIELD VALUE",
-        ...
-    ]
-}
-```
+// object is an AVObject
+object.delete().then((isDeleted) {
+  // Deleted
+  if (isDeleted) {
+    object = null; // you should set ref to null manually if you don't using this object
+    print("Deleted!");
+  }
+});
 
-* AVQuery ( The entity is not stable.)
-```
-{
-    "className":"CLASS NAME VALUE",
-    "queries":[
-        {
-            "queryMethod":"get",
-            "arg1":"OBJECT ID"
-        },
-        {
-            "queryMethod":"equalTo",
-            "arg1":"FIELD NAME",
-            "arg2":"FIELD VALUE"
-        },
-        ...
-    ]
-}
 ```
 
 ### AVQuery
@@ -123,9 +97,8 @@ Leancloud [document](https://github.com/leancloud/java-sdk-all/wiki/1.%E5%AD%98%
 * whereContains
 * whereMatches
 
-## More Details
-### iOS
-iOS is based on Objective-C. SDK installed by `pod`. More details you can check [here](https://leancloud.cn/docs/sdk_setup-objc.html).
+## Example App
 
-### Android
-Android is based on Java. SDK installed by `gradle`. Using [Java Unified SDK](https://blog.leancloud.cn/6376/). More details you can check [here](https://github.com/leancloud/java-sdk-all).
+[Example App README.md](https://github.com/LunaGao/leancloud_flutter_plugin/blob/master/example/README.md)
+
+
