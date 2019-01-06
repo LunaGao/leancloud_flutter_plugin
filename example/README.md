@@ -1,16 +1,37 @@
-# leancloud_flutter_plugin_example
-
-Demonstrates how to use the leancloud_flutter_plugin plugin.
+# Example App for LeanCloud flutter plugin 
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Setup Leancloud Data
+* Create an Class named `DemoObject`
+* Set ACL to unlimited (`无限制`). _**(This is important because if the Class is limited, we can't update or delete any object. It's not a bug, it's leancloud design for security.)**_
 
-A few resources to get you started if this is your first Flutter project:
+### Setup AppID and AppKey
+"Oh, I don't have an appId or an appKey." Please click [here](https://leancloud.cn/docs/start.html)
+* open `example/lib/main.dart` file.
+* replace `YOUR_APP_ID` to your appId.
+* replace `YOUR_APP_KEY` to your appKey.
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+### Android
+According [Flutter document](https://flutter.io/docs/development/packages-and-plugins/developing-packages#step-2b-add-android-platform-code-javakt)
+* Run flutter build command
+```
+cd example
+flutter build apk
+```
+* Launch Android Studio.
+* Select `Import project` in `Welcome to Android Studio` dialog, or select `File > New > Import Project…` in the menu, and select the `example/android/build.gradle` file.
+* In the `Gradle Sync` dialog, select `OK`.
+* In the `Android Gradle Plugin Update` dialog, select `Don’t remind me again for this project`.
+* Run this example app from Android Studio by pressing the ▶ button.
+  
+### iOS
+According [Flutter document](https://flutter.io/docs/development/packages-and-plugins/developing-packages#step-2c-add-ios-platform-code-hmswift)
+* Run flutter build command.
+```
+cd example
+flutter build ios --no-codesign
+```
+* Launch Xcode.
+* Select `File > Open`, and select the `example/ios/Runner.xcworkspace` file.
+* Run this example app by pressing the ▶ button.

@@ -22,7 +22,10 @@ class LeancloudObjectConverter {
         for (String key : fieldsJson.keySet()) {
             //TODO if those value is Date or byte[] type?
             //TODO more data type? e.g. AVGeoPoint？
-            avObject.put(key, fieldsJson.get(key));
+            if (key.equals("createdAt")) continue;
+            if (key.equals("updatedAt")) continue;
+            if (key.equals("objectId")) avObject.setObjectId(fieldsJson.get(key).toString());
+            else avObject.put(key, fieldsJson.get(key));
         }
         return avObject;
     }

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 import 'package:leancloud_flutter_plugin/leancloud_object.dart';
+import 'package:leancloud_flutter_plugin/leancloud_query.dart';
 
 class LeancloudFlutterPlugin {
   static const MethodChannel _channel =
@@ -88,9 +89,7 @@ class LeancloudFlutterPlugin {
     _channel.invokeMethod('setRegion', args);
   }
 
-  //
   // save object
-  //
   Future<String> saveOrCreate(AVObject object) async {
     Map args = <String, dynamic>{'avObject': object.toString()};
     String objectString = await _channel.invokeMethod('saveOrCreate', args);
@@ -100,12 +99,16 @@ class LeancloudFlutterPlugin {
     return objectString;
   }
 
-  static delete() {
-    _channel.invokeMethod('delete');
+  // delete object
+  Future<bool> delete(AVObject object) async {
+    Map args = <String, dynamic>{'avObject': object.toString()};
+    return await _channel.invokeMethod('delete', args);
   }
 
-  static query() {
-    _channel.invokeMethod('query');
+  // query object
+  Future<dynamic> query(AVQuery query) async {
+    Map args = <String, dynamic>{'avQuery': query.toString()};
+    return await _channel.invokeMethod('query', args);
   }
 }
 
