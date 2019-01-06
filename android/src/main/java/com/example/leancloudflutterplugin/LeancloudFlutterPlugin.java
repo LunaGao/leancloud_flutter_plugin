@@ -23,9 +23,6 @@ public class LeancloudFlutterPlugin implements MethodCallHandler {
   @Override
   public void onMethodCall(MethodCall call, Result result) {
     switch (call.method) {
-      case "getPlatformVersion":
-        result.success("Android " + android.os.Build.VERSION.RELEASE);
-        break;
       case "initialize":
         LeancloudFunction.initialize(call, result, _applicationContext);
         break;
