@@ -32,7 +32,7 @@ class LeancloudObject {
 
             @Override
             public void onError(Throwable throwable) {
-                result.error(throwable.getMessage(), null, null);
+                result.error("leancloud-error", throwable.getMessage(), null);
             }
 
             @Override
@@ -63,7 +63,7 @@ class LeancloudObject {
 
                 @Override
                 public void onError(Throwable throwable) {
-                    result.error("Delete error, " + throwable.getMessage(), null, null);
+                    result.error("leancloud-error", throwable.getMessage(), null);
                 }
 
                 @Override
