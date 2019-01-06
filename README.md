@@ -83,6 +83,12 @@ object.delete().then((isDeleted) {
 
 ```
 
+#### Query an Object
+Import: `import 'package:leancloud_flutter_plugin/leancloud_query.dart';`
+```
+
+```
+
 ### AVQuery
 Leancloud [document](https://github.com/leancloud/java-sdk-all/wiki/1.%E5%AD%98%E5%82%A8-3-AVQuery)
 #### queryFunction

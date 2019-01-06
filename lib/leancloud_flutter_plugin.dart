@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 import 'package:leancloud_flutter_plugin/leancloud_object.dart';
+import 'package:leancloud_flutter_plugin/leancloud_query.dart';
 
 class LeancloudFlutterPlugin {
   static const MethodChannel _channel =
@@ -104,8 +105,10 @@ class LeancloudFlutterPlugin {
     return await _channel.invokeMethod('delete', args);
   }
 
-  static query() {
-    _channel.invokeMethod('query');
+  // query object
+  Future<dynamic> query(AVQuery query) async {
+    Map args = <String, dynamic>{'avQuery': query.toString()};
+    return await _channel.invokeMethod('query', args);
   }
 }
 

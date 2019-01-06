@@ -23,9 +23,15 @@ class LeancloudQueryConverter {
             throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         JSONObject avQueryJson = JSON.parseObject(avQueryString);
         String className = avQueryJson.getString("className");
+        String fieldsString = avQueryJson.getString("queries");
+        JSONObject fieldsJson = JSON.parseObject(fieldsString);
         AVQuery<AVObject> avQuery = new AVQuery<>(className);
-        for (Object queryObject: avQueryJson.getJSONArray("queries")) {
-            JSONObject queryJson = (JSONObject)queryObject;
+        for (String key : fieldsJson.keySet()) {
+            if (key.equals("get")) {
+                avQuery.get(fieldsJson.get(key).toString());
+            }
+
+            JSONObject queryJson = (JSONObject)fieldsJson.get(key);
             String method_String = queryJson.getString("queryMethod");
             String arg1 = queryJson.getString("arg1");
 

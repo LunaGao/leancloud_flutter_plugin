@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:leancloud_flutter_plugin/leancloud_object.dart';
+import 'package:leancloud_flutter_plugin/leancloud_query.dart';
 
 class ListScreen extends StatefulWidget {
   @override
@@ -10,6 +11,7 @@ class ListScreen extends StatefulWidget {
 class _ListScreenState extends State<ListScreen> {
 
   AVObject _theObject;
+  String _queryObjectValue;
 
   _createAnObject() {
     AVObject object = new AVObject("DemoObject");
@@ -43,6 +45,13 @@ class _ListScreenState extends State<ListScreen> {
     });
   }
 
+  _queryObject() {
+    AVQuery<AVObject> avQuery = new AVQuery("DemoObject");
+    avQuery.get(_theObject.getObjectId()).then((object) {
+      print("Queryed!");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,6 +77,14 @@ class _ListScreenState extends State<ListScreen> {
               FlatButton(
                 onPressed: _deleteObject,
                 child: Text('delete the Object'),
+              ),
+              Text(_theObject == null
+                  ? "Please click 'create an Object' button first"
+                  : (_queryObjectValue == null
+                  ? "click the 'query the Object' button" : _queryObjectValue)),
+              FlatButton(
+                onPressed: _queryObject,
+                child: Text('query the Object'),
               ),
             ],
           )

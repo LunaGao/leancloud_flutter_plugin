@@ -1,5 +1,8 @@
 package com.example.leancloudflutterplugin;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -31,19 +34,32 @@ class LeancloudQuery {
      * @param call MethodCall from LeancloudFlutterPlugin.onMethodCall function
      * @param result MethodChannel.Result from LeancloudFlutterPlugin.onMethodCall function
      */
-    static void query(MethodCall call, MethodChannel.Result result) {
-        String avQuery_string = LeancloudArgsConverter.getStringValue(call, result, "avQuery");
+    void query(MethodCall call, MethodChannel.Result result) {
+        JSONObject avQueryJson = LeancloudArgsConverter.getAVQueryJsonObject(call, result);
+        assert avQueryJson != null;
+        String className = avQueryJson.getString("className");
+        String fieldsString = avQueryJson.getString("queries");
+        JSONObject fieldsJson = JSON.parseObject(fieldsString);
+        AVQuery<AVObject> avQuery = new AVQuery<>(className);
         try {
-            AVQuery<AVObject> avQuery = LeancloudQueryConverter.convertStringToAVObject(avQuery_string);
-            List<AVObject> list = avQuery.find();
+            if (fieldsJson.size() == 1 && fieldsJson.containsKey("get")) {
+//                AVObject object = avQuery.get(fieldsJson.getString("get"));
+                List<AVObject> objects = avQuery.find();
+                AVObject object = avQuery.get("5c31b14544d904005d1e773c");
+                result.success(object);
+            }
+
             //TODO list need to be JSON type
-            result.success(list);
-        } catch (NoSuchMethodException ex) {
-            result.error("NoSuchMethodException, please check queryMethod", null, null);
-        } catch (IllegalAccessException ex) {
-            result.error("IllegalAccessException, Do you call an illegal access method?", null, null);
-        } catch (InvocationTargetException ex) {
-            result.error("InvocationTargetException, I don't know what's happen,:( check everything again?", null, null);
+//            result.success(list);
+        } catch (Exception ex) {
+            result.error("aaa" + ex.getMessage(), null, null);
         }
+//        } catch (NoSuchMethodException ex) {
+//            result.error("NoSuchMethodException, please check queryMethod", null, null);
+//        } catch (IllegalAccessException ex) {
+//            result.error("IllegalAccessException, Do you call an illegal access method?", null, null);
+//        } catch (InvocationTargetException ex) {
+//            result.error("InvocationTargetException, I don't know what's happen,:( check everything again?", null, null);
+//        }
     }
 }
