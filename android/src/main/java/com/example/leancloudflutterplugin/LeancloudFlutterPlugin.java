@@ -23,9 +23,6 @@ public class LeancloudFlutterPlugin implements MethodCallHandler {
   @Override
   public void onMethodCall(MethodCall call, Result result) {
     switch (call.method) {
-      case "getPlatformVersion":
-        result.success("Android " + android.os.Build.VERSION.RELEASE);
-        break;
       case "initialize":
         LeancloudFunction.initialize(call, result, _applicationContext);
         break;
@@ -36,10 +33,12 @@ public class LeancloudFlutterPlugin implements MethodCallHandler {
         LeancloudFunction.setRegion(call, result);
         break;
       case "saveOrCreate":
-        LeancloudObject.saveOrCreate(call, result);
+        LeancloudObject saveOrCreateObject = new LeancloudObject();
+        saveOrCreateObject.saveOrCreate(call, result);
         break;
       case "delete":
-        LeancloudObject.delete(call, result);
+        LeancloudObject deleteObject = new LeancloudObject();
+        deleteObject.delete(call, result);
         break;
       case "query":
         LeancloudQuery leancloudQuery = new LeancloudQuery();

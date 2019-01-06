@@ -47,6 +47,7 @@ class LeancloudQuery {
                 List<AVObject> objects = avQuery.find();
                 AVObject object = avQuery.get("5c31b14544d904005d1e773c");
                 result.success(object);
+//                result.success("Android " + android.os.Build.VERSION.RELEASE);
             }
 
             //TODO list need to be JSON type
