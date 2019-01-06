@@ -40,15 +40,18 @@ class _ListScreenState extends State<ListScreen> {
       if (isDeleted) {
         print("Deleted!");
         _theObject = null;
+        _queryObjectValue = null;
         setState(() { });
       }
     });
   }
 
   _queryObject() {
-    AVQuery<AVObject> avQuery = new AVQuery("DemoObject");
+    AVQuery avQuery = new AVQuery("DemoObject");
     avQuery.get(_theObject.getObjectId()).then((object) {
       print("Queryed!");
+      _queryObjectValue = object.getObjectId();
+      setState(() { });
     });
   }
 

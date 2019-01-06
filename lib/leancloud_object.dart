@@ -9,6 +9,16 @@ class AVObject {
 
   AVObject(this.className);
 
+  // this function will change className!
+  AVObject fromQuery(String queriedString) {
+    Map<String, Object> queriedFields = jsonDecode(queriedString);
+    queriedFields.forEach((key, value) {
+      if (key == "className") className = value;
+      this.put(key, value);
+    });
+    return this;
+  }
+
   void put(String key, Object value) {
     if (fields == null) {
       fields = new Map();

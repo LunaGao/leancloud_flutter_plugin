@@ -86,22 +86,14 @@ object.delete().then((isDeleted) {
 #### Query an Object
 Import: `import 'package:leancloud_flutter_plugin/leancloud_query.dart';`
 ```
+// query by object_id
+AVQuery avQuery = new AVQuery("DemoObject");
+avQuery.get("OBJECT_ID").then((object) {
+  print("Queryed!");
+});
+
 
 ```
-
-### AVQuery
-Leancloud [document](https://github.com/leancloud/java-sdk-all/wiki/1.%E5%AD%98%E5%82%A8-3-AVQuery)
-#### queryFunction
-* get
-* equalTo
-* notEqualTo
-* greaterThan
-* greaterThanOrEqualTo
-* lessThan
-* lessThanOrEqualTo
-* whereStartsWith
-* whereContains
-* whereMatches
 
 ## Example App
 

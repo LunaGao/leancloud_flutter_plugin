@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:leancloud_flutter_plugin/leancloud_flutter_plugin.dart';
+import 'package:leancloud_flutter_plugin/leancloud_object.dart';
 
-class AVQuery<T> {
+class AVQuery {
 
   String className;
 
@@ -17,13 +18,15 @@ class AVQuery<T> {
     return jsonEncode(object);
   }
 
-  Future<T> get(String objectId) async {
+  Future<AVObject> get(String objectId) async {
     if (queries == null) {
       queries = new Map();
     }
     queries.addAll({"get": objectId});
     LeancloudFlutterPlugin leancloudFlutterPlugin = LeancloudFlutterPlugin.getInstance();
-    T object = await leancloudFlutterPlugin.query(this);
+    String objectString = await leancloudFlutterPlugin.query(this);
+    AVObject object = new AVObject("");
+    object.fromQuery(objectString);
     return object;
   }
 

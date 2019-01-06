@@ -9,6 +9,18 @@
 
 @implementation LeancloudArgsConverter
 
++ (NSDictionary*) getAVQueryJsonObject:(FlutterMethodCall*)call result:(FlutterResult)result {
+    id arg = call.arguments[@"avQuery"];
+    if (arg == nil) {
+        result([FlutterError errorWithCode:@"missing-arg"
+                                   message:@"Arg '%@' can't be null, set empty value. PLEASE FIX IT!"
+                                   details:nil]);
+        return nil;
+    } else {
+        return [LeancloudArgsConverter stringToJson:[NSString stringWithFormat:@"%@", arg]];
+    }
+}
+
 + (NSString*) getStringValue:(FlutterMethodCall*)call result:(FlutterResult)result key:(NSString*)key {
     id arg = call.arguments[key];
     if (arg == nil) {
@@ -43,6 +55,20 @@
         }
     }
     return 0;
+}
+
++ (NSDictionary*) stringToJson:(NSString*) jsonString {
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                               options:NSJSONReadingMutableContainers
+                                                                 error:&err];
+    if(err)
+    {
+        NSLog(@"Json ERROR: %@",err);
+        return nil;
+    }
+    return jsonObject;
 }
 
 @end

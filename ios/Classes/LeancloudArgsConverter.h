@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString*) getStringValue:(FlutterMethodCall*)call result:(FlutterResult)result key:(NSString*)key;
 + (int) getIntValue:(FlutterMethodCall*)call result:(FlutterResult)result key:(NSString*)key;
++ (NSDictionary*) getAVQueryJsonObject:(FlutterMethodCall*)call result:(FlutterResult)result;
++ (NSDictionary*) stringToJson:(NSString*) jsonString;
 
 @end
 
