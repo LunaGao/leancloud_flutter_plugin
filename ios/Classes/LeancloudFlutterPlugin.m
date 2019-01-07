@@ -2,6 +2,7 @@
 
 #import "LeancloudFunction.h"
 #import "LeancloudObject.h"
+#import "LeancloudQuery.h"
 
 @implementation LeancloudFlutterPlugin
 
@@ -32,7 +33,8 @@ LeancloudFunction *leancloudFunction;
         LeancloudObject *leancloudObject = [[LeancloudObject alloc] init];
         [leancloudObject deleteObject:call result:result];
     } else if ([@"query" isEqualToString:call.method]) {
-        
+        LeancloudQuery *leancloudQuery = [[LeancloudQuery alloc] init];
+        [leancloudQuery query:call result:result];
     } else {
         result(FlutterMethodNotImplemented);
     }
