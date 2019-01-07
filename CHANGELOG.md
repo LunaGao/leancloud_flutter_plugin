@@ -1,3 +1,7 @@
+## 0.0.2
+
+* fixed android package error.
+
 ## 0.0.1
 
 * Init leancloud plugin
