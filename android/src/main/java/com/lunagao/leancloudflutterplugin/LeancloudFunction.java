@@ -1,4 +1,4 @@
-package com.example.leancloudflutterplugin;
+package com.lunagao.leancloudflutterplugin;
 
 import android.content.Context;
 

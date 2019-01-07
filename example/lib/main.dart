@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:leancloud_flutter_plugin/leancloud_flutter_plugin.dart';
-import 'package:leancloud_flutter_plugin_example/list_screen.dart';
+import 'list_screen.dart';
 
 void main() {
   initPlatformState();
