@@ -55,6 +55,20 @@ class _ListScreenState extends State<ListScreen> {
     });
   }
 
+  _queryAllObject() {
+    AVQuery avQuery = new AVQuery("DemoObject");
+    avQuery.whereEqualTo("description", "created!");
+//    avQuery.whereNotEqualTo("int_value", 20);
+//    avQuery.whereGreaterThan("int_value", 20);
+//    avQuery.whereGreaterThanOrEqualTo("int_value", 20);
+//    avQuery.whereLessThan("int_value", 20);
+//    avQuery.whereLessThanOrEqualTo("int_value", 20);
+    avQuery.find().then((objects) {
+      print("All Objects Queryed!");
+      setState(() { });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,6 +102,10 @@ class _ListScreenState extends State<ListScreen> {
               FlatButton(
                 onPressed: _queryObject,
                 child: Text('query the Object'),
+              ),
+              FlatButton(
+                onPressed: _queryAllObject,
+                child: Text('query all Objects'),
               ),
             ],
           )

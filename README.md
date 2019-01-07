@@ -92,7 +92,17 @@ avQuery.get("OBJECT_ID").then((object) {
   print("Queryed!");
 });
 
-
+// query objects
+AVQuery avQuery = new AVQuery("DemoObject");
+avQuery.whereEqualTo("KEY", "VALUE"); // string value
+avQuery.whereNotEqualTo("KEY", 10); // int value
+avQuery.whereGreaterThan("KEY", true); // bool value
+avQuery.whereGreaterThanOrEqualTo("KEY", "VALUE");
+avQuery.whereLessThan("KEY", "VALUE");
+avQuery.whereLessThanOrEqualTo("KEY", "VALUE");
+avQuery.find().then((objects) {
+  print("All Objects Queryed!");
+});
 ```
 
 ## Example App
