@@ -20,11 +20,11 @@ class LeancloudFlutterPlugin {
     return _instancePlugin;
   }
 
-  int _logLevel = 0;
+  var _logLevel = 0;
 
   /// Initialize the Native SDK
   void initialize(String appId, String appKey) {
-    Map args = <String, dynamic>{
+    var args = <String, dynamic>{
       'appId': appId,
       'appKey': appKey,
     };
@@ -58,7 +58,7 @@ class LeancloudFlutterPlugin {
         this._logLevel = 6;
         break;
     }
-    Map args = <String, dynamic>{
+    var args = <String, dynamic>{
       'level': this._logLevel,
     };
     _channel.invokeMethod('setLogLevel', args);
@@ -83,7 +83,7 @@ class LeancloudFlutterPlugin {
         regionValue = 2;
         break;
     }
-    Map args = <String, dynamic>{
+    var args = <String, dynamic>{
       'region': regionValue,
     };
     _channel.invokeMethod('setRegion', args);
@@ -92,8 +92,8 @@ class LeancloudFlutterPlugin {
   /// Save AVObject.
   /// Usually suggest using AVObject.save() function instead of this.
   Future<String> saveOrCreate(AVObject object) async {
-    Map args = <String, dynamic>{'avObject': object.toString()};
-    String objectString = await _channel.invokeMethod('saveOrCreate', args);
+    var args = <String, dynamic>{'avObject': object.toString()};
+    var objectString = await _channel.invokeMethod('saveOrCreate', args);
     if (this._logLevel != 0) {
       print("[saveOrCreate function] -> " + objectString);
     }
@@ -103,14 +103,14 @@ class LeancloudFlutterPlugin {
   /// Delete object
   /// Usually suggest using AVObject.delete() function instead of this.
   Future<bool> delete(AVObject object) async {
-    Map args = <String, dynamic>{'avObject': object.toString()};
+    var args = <String, dynamic>{'avObject': object.toString()};
     return await _channel.invokeMethod('delete', args);
   }
 
   /// Query object
   /// Usually suggest using AVQuery instead of this.
   Future<dynamic> query(AVQuery query) async {
-    Map args = <String, dynamic>{'avQuery': query.toString()};
+    var args = <String, dynamic>{'avQuery': query.toString()};
     return await _channel.invokeMethod('query', args);
   }
 }

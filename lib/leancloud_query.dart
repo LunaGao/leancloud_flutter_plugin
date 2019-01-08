@@ -6,19 +6,17 @@ import 'package:leancloud_flutter_plugin/leancloud_object.dart';
 class AVQuery {
 
   /// private property for Class Name
-  String _className;
+  var _className;
   /// private property for query conditions
-  List<Map<String, dynamic>> _queries;
+  var _queries = [];
 
   /// Create an AVQuery with Class Name
-  AVQuery(this._className) {
-    this._queries = new List();
-  }
+  AVQuery(this._className);
 
   /// Overwritten toString() function, to return this object's JSON string.
   String toString() {
-    String queriesString = jsonEncode(this._queries);
-    Map<String, String> object = new Map();
+    var queriesString = jsonEncode(this._queries);
+    var object = <String, String>{};
     object.addAll({"className": _className});
     object.addAll({"queries": queriesString});
     return jsonEncode(object);
@@ -27,20 +25,20 @@ class AVQuery {
   /// Get an AVObject object by object Id
   Future<AVObject> get(String objectId) async {
     _setQueriesValue("get", objectId, null);
-    LeancloudFlutterPlugin leancloudFlutterPlugin = LeancloudFlutterPlugin.getInstance();
-    String objectString = await leancloudFlutterPlugin.query(this);
-    AVObject object = new AVObject("");
+    var leancloudFlutterPlugin = LeancloudFlutterPlugin.getInstance();
+    var objectString = await leancloudFlutterPlugin.query(this);
+    var object = new AVObject("");
     object.fromQuery(objectString);
     return object;
   }
 
   /// Find AVObjects with all conditions
   Future<List<AVObject>> find() async {
-    LeancloudFlutterPlugin leancloudFlutterPlugin = LeancloudFlutterPlugin.getInstance();
-    String objectsString = await leancloudFlutterPlugin.query(this);
-    Map<String, Object> objectsJson = jsonDecode(objectsString);
-    List<AVObject> lists = new List();
-    for (String objectString in objectsJson["objects"]) {
+    var leancloudFlutterPlugin = LeancloudFlutterPlugin.getInstance();
+    var objectsString = await leancloudFlutterPlugin.query(this);
+    var objectsJson = jsonDecode(objectsString);
+    List<AVObject> lists = [];
+    for (var objectString in objectsJson["objects"]) {
       AVObject object = new AVObject("");
       object.fromQuery(objectString);
       lists.add(object);
@@ -86,7 +84,7 @@ class AVQuery {
 
   /// Private function, set conditions json value
   _setQueriesValue(String queryMethod, dynamic arg1, dynamic arg2) {
-    Map<String, String> queryClass = new Map();
+    var queryClass = <String, String>{};
     queryClass.addAll({"queryMethod": queryMethod});
     queryClass.addAll({"arg1": arg1});
     if (arg2 != null) {
