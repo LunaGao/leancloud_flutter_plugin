@@ -1,8 +1,10 @@
 # LeanCloud flutter plugin
+[![Bless](https://cdn.rawgit.com/LunaGao/BlessYourCodeTag/master/tags/god.svg)](http://lunagao.github.io/BlessYourCodeTag/)
+[![Package version](https://img.shields.io/badge/dynamic/json.svg?url=https://pub.dartlang.org/packages/leancloud_flutter_plugin.json&label=dart&query=$.versions[-1:]&colorB=blue)](https://shields.io/)
 
-[Leancloud](https://leancloud.cn/)
+[Leancloud](https://leancloud.cn/) flutter plugin by Luna Gao
 
-LeanCloud flutter plugin by Luna Gao
+[Dark packages](https://pub.dartlang.org/packages/leancloud_flutter_plugin)
 
 Developing by IntelliJ IDEA.
 
@@ -10,7 +12,19 @@ Developing by IntelliJ IDEA.
 
 ### Install
 
-Not yet...
+* Add this to your package's pubspec.yaml file:
+```
+dependencies:
+  leancloud_flutter_plugin: ^0.0.2
+```
+* Install packages from the command line:
+```
+flutter packages get
+```
+* Import it
+```
+import 'package:leancloud_flutter_plugin/leancloud_flutter_plugin.dart';
+```
 
 ### How to use
 Before your `runApp` function, initialize the leancloud. Such as the `example` app does.
