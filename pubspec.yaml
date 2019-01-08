@@ -1,6 +1,6 @@
 name: leancloud_flutter_plugin
-description: LeanCloud flutter plugin by Luna Gao
-version: 0.0.2
+description: LeanCloud flutter plugin by Luna Gao. This is a third-party leancloud plugin package. Committed to becoming a plugin consistent with the official SDK usage.
+version: 0.0.3
 author: Luna Gao <gao.xue.qi1@gmail.com>
 homepage: https://github.com/LunaGao/leancloud_flutter_plugin
 
