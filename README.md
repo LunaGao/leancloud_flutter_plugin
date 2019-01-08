@@ -6,7 +6,8 @@
 
 [Dark packages](https://pub.dartlang.org/packages/leancloud_flutter_plugin)
 
-Developing by IntelliJ IDEA.
+## Description
+This plugin depends on Leancloud Native(iOS / Android) SDK. It's just convert the code from dart to those native language(Objective-C / Java).
 
 ## Getting Started
 
