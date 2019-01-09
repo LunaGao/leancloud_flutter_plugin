@@ -10,6 +10,20 @@ class AVQuery {
   /// private property for query conditions
   var _queries = [];
 
+  /// CQL query
+  static Future<List<AVObject>> doCloudQuery(String cql) async {
+    var leancloudFlutterPlugin = LeancloudFlutterPlugin.getInstance();
+    var objectsString = await leancloudFlutterPlugin.doCloudQuery(cql);
+    var objectsJson = jsonDecode(objectsString);
+    List<AVObject> lists = [];
+    for (var objectString in objectsJson["objects"]) {
+      AVObject object = new AVObject("");
+      object.fromQuery(objectString);
+      lists.add(object);
+    }
+    return lists;
+  }
+
   /// Create an AVQuery with Class Name
   AVQuery(this._className);
 

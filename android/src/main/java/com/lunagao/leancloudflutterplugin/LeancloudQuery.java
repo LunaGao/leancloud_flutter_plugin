@@ -9,6 +9,7 @@ import java.util.List;
 
 import cn.leancloud.AVObject;
 import cn.leancloud.AVQuery;
+import cn.leancloud.query.AVCloudQueryResult;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.reactivex.Observer;
@@ -102,6 +103,34 @@ class LeancloudQuery {
 
             @Override
             public void onNext(List<AVObject> avObjects) {
+                JSONObject jsonObject = new JSONObject();
+                JSONArray jsonArray = new JSONArray();
+                for (AVObject object : avObjects) {
+                    jsonArray.add(object.toJSONObject().toJSONString());
+                }
+                jsonObject.put("objects", jsonArray);
+                result.success(jsonObject.toJSONString());
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                result.error("leancloud-error", throwable.getMessage(), null);
+            }
+
+            @Override
+            public void onComplete() {}
+        });
+    }
+
+    void doCloudQuery(MethodCall call, final MethodChannel.Result result) {
+        String cqlString = LeancloudArgsConverter.getStringValue(call, result, "cql");
+        AVQuery.doCloudQueryInBackground(cqlString).subscribe(new Observer<AVCloudQueryResult>() {
+            @Override
+            public void onSubscribe(Disposable disposable) {}
+
+            @Override
+            public void onNext(AVCloudQueryResult avCloudQueryResult) {
+                List<? extends AVObject> avObjects = avCloudQueryResult.getResults();
                 JSONObject jsonObject = new JSONObject();
                 JSONArray jsonArray = new JSONArray();
                 for (AVObject object : avObjects) {

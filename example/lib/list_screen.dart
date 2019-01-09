@@ -69,6 +69,14 @@ class _ListScreenState extends State<ListScreen> {
     });
   }
 
+  _queryByCQL() {
+    var cql = "select * from DemoObject where int_value = 20";
+    AVQuery.doCloudQuery(cql).then((objects) {
+      print(objects);
+      print("Queryed!");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,6 +114,10 @@ class _ListScreenState extends State<ListScreen> {
               FlatButton(
                 onPressed: _queryAllObject,
                 child: Text('query all Objects'),
+              ),
+              FlatButton(
+                onPressed: _queryByCQL,
+                child: Text('query by CQL'),
               ),
             ],
           )

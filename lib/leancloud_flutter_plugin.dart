@@ -107,11 +107,18 @@ class LeancloudFlutterPlugin {
     return await _channel.invokeMethod('delete', args);
   }
 
-  /// Query object
+  /// Query object(s)
   /// Usually suggest using AVQuery instead of this.
   Future<dynamic> query(AVQuery query) async {
     var args = <String, dynamic>{'avQuery': query.toString()};
     return await _channel.invokeMethod('query', args);
+  }
+
+  /// Using CQL Query object(s)
+  /// Usually suggest using AVQuery instead of this.
+  Future<dynamic> doCloudQuery(String cql) async {
+    var args = <String, String>{'cql': cql};
+    return await _channel.invokeMethod('doCloudQuery', args);
   }
 }
 
