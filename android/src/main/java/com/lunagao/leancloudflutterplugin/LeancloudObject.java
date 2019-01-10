@@ -3,6 +3,8 @@ package com.lunagao.leancloudflutterplugin;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+import java.util.List;
+
 import cn.leancloud.AVObject;
 import cn.leancloud.types.AVNull;
 import io.flutter.plugin.common.MethodCall;

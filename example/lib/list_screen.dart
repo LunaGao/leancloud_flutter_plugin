@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:leancloud_flutter_plugin/leancloud_object.dart';
 import 'package:leancloud_flutter_plugin/leancloud_query.dart';
 
+import 'user_screen.dart';
+
 class ListScreen extends StatefulWidget {
   @override
   _ListScreenState createState() => _ListScreenState();
@@ -63,9 +65,19 @@ class _ListScreenState extends State<ListScreen> {
 //    avQuery.whereGreaterThanOrEqualTo("int_value", 20);
 //    avQuery.whereLessThan("int_value", 20);
 //    avQuery.whereLessThanOrEqualTo("int_value", 20);
+    avQuery.limit(10);
+    avQuery.skip(1);
     avQuery.find().then((objects) {
       print("All Objects Queryed!");
       setState(() { });
+    });
+  }
+
+  _queryByCQL() {
+    var cql = "select * from DemoObject where int_value = 20";
+    AVQuery.doCloudQuery(cql).then((objects) {
+      print(objects);
+      print("Queryed!");
     });
   }
 
@@ -106,6 +118,20 @@ class _ListScreenState extends State<ListScreen> {
               FlatButton(
                 onPressed: _queryAllObject,
                 child: Text('query all Objects'),
+              ),
+              FlatButton(
+                onPressed: _queryByCQL,
+                child: Text('query by CQL'),
+              ),
+              Text('login function'),
+              FlatButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => UserScreen()),
+                  );
+                },
+                child: Text('LOGIN'),
               ),
             ],
           )

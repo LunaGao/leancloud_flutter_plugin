@@ -11,6 +11,10 @@
 
 @implementation LeancloudQuery
 
+const NSString *QUERYMETHOD = @"queryMethod";
+const NSString *ARG1 = @"arg1";
+const NSString *ARG2 = @"arg2";
+
 - (void) query:(FlutterMethodCall*)call result:(FlutterResult)result {
     NSDictionary *avQueryJson = [LeancloudArgsConverter getAVQueryJsonObject:call result:result];
     NSString *className = avQueryJson[@"className"];
@@ -28,18 +32,34 @@
                 return;
             }];
         }
-        if([oneQuery[@"queryMethod"] isEqualToString:@"equalTo"]) {
-            [query whereKey:oneQuery[@"arg1"] equalTo:oneQuery[@"arg2"]];
-        } else if([oneQuery[@"queryMethod"] isEqualToString:@"notEqualTo"]) {
-            [query whereKey:oneQuery[@"arg1"] notEqualTo:oneQuery[@"arg2"]];
-        } else if([oneQuery[@"queryMethod"] isEqualToString:@"greaterThan"]) {
-            [query whereKey:oneQuery[@"arg1"] greaterThan:oneQuery[@"arg2"]];
-        } else if([oneQuery[@"queryMethod"] isEqualToString:@"greaterThanOrEqualTo"]) {
-            [query whereKey:oneQuery[@"arg1"] greaterThanOrEqualTo:oneQuery[@"arg2"]];
-        } else if([oneQuery[@"queryMethod"] isEqualToString:@"lessThan"]) {
-            [query whereKey:oneQuery[@"arg1"] lessThan:oneQuery[@"arg2"]];
-        } else if([oneQuery[@"queryMethod"] isEqualToString:@"lessThanOrEqualTo"]) {
-            [query whereKey:oneQuery[@"arg1"] lessThanOrEqualTo:oneQuery[@"arg2"]];
+        if([oneQuery[QUERYMETHOD] isEqualToString:@"equalTo"]) {
+            [query whereKey:oneQuery[ARG1] equalTo:oneQuery[ARG2]];
+        } else if([oneQuery[QUERYMETHOD] isEqualToString:@"notEqualTo"]) {
+            [query whereKey:oneQuery[ARG1] notEqualTo:oneQuery[ARG2]];
+        } else if([oneQuery[QUERYMETHOD] isEqualToString:@"greaterThan"]) {
+            [query whereKey:oneQuery[ARG1] greaterThan:oneQuery[ARG2]];
+        } else if([oneQuery[QUERYMETHOD] isEqualToString:@"greaterThanOrEqualTo"]) {
+            [query whereKey:oneQuery[ARG1] greaterThanOrEqualTo:oneQuery[ARG2]];
+        } else if([oneQuery[QUERYMETHOD] isEqualToString:@"lessThan"]) {
+            [query whereKey:oneQuery[ARG1] lessThan:oneQuery[ARG2]];
+        } else if([oneQuery[QUERYMETHOD] isEqualToString:@"lessThanOrEqualTo"]) {
+            [query whereKey:oneQuery[ARG1] lessThanOrEqualTo:oneQuery[ARG2]];
+        } else if([oneQuery[QUERYMETHOD] isEqualToString:@"orderByAscending"]) {
+            [query orderByAscending:oneQuery[ARG1]];
+        } else if([oneQuery[QUERYMETHOD] isEqualToString:@"orderByDescending"]) {
+            [query orderByDescending:oneQuery[ARG1]];
+        } else if([oneQuery[QUERYMETHOD] isEqualToString:@"addAscendingOrder"]) {
+            [query addDescendingOrder:oneQuery[ARG1]];
+        } else if([oneQuery[QUERYMETHOD] isEqualToString:@"addDescendingOrder"]) {
+            [query addDescendingOrder:oneQuery[ARG1]];
+        } else if([oneQuery[QUERYMETHOD] isEqualToString:@"limit"]) {
+            query.limit = [oneQuery[ARG1] intValue];
+        } else if([oneQuery[QUERYMETHOD] isEqualToString:@"skip"]) {
+            query.skip = [oneQuery[ARG1] intValue];
+        } else {
+            result([FlutterError errorWithCode:@"params-error"
+                                       message:@"no such query queryMethod name, please check again"
+                                       details:[NSString stringWithFormat:@"no such query queryMethod name, %@", oneQuery[QUERYMETHOD]]]);
         }
     }
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
