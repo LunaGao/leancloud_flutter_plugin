@@ -60,6 +60,42 @@ class AVQuery {
     return lists;
   }
 
+  /// set query result limit count
+  AVQuery limit(int limit) {
+    _setQueriesValue("limit", limit, null);
+    return this;
+  }
+
+  /// set query result by ascending
+  AVQuery orderByAscending(String key) {
+    _setQueriesValue("orderByAscending", key, null);
+    return this;
+  }
+
+  /// set query result by descending
+  AVQuery orderByDescending(String key) {
+    _setQueriesValue("orderByDescending", key, null);
+    return this;
+  }
+
+  /// set query order by [key] column ascending
+  AVQuery addAscendingOrder(String key) {
+    _setQueriesValue("addAscendingOrder", key, null);
+    return this;
+  }
+
+  /// set query order by [key] column descending
+  AVQuery addDescendingOrder(String key) {
+    _setQueriesValue("addDescendingOrder", key, null);
+    return this;
+  }
+
+  /// set query result skip count
+  AVQuery skip(int skip) {
+    _setQueriesValue("skip", skip, null);
+    return this;
+  }
+
   /// Set equal to condition
   AVQuery whereEqualTo(String key, dynamic value) {
     _setQueriesValue("equalTo", key, value);

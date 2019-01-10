@@ -63,6 +63,8 @@ class _ListScreenState extends State<ListScreen> {
 //    avQuery.whereGreaterThanOrEqualTo("int_value", 20);
 //    avQuery.whereLessThan("int_value", 20);
 //    avQuery.whereLessThanOrEqualTo("int_value", 20);
+    avQuery.limit(10);
+    avQuery.skip(1);
     avQuery.find().then((objects) {
       print("All Objects Queryed!");
       setState(() { });

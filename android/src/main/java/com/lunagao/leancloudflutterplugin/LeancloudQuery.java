@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import cn.leancloud.AVObject;
@@ -90,6 +89,24 @@ class LeancloudQuery {
                     break;
                 case "lessThanOrEqualTo":
                     avQuery.whereLessThanOrEqualTo(oneQuery.getString("arg1"), oneQuery.get("arg2"));
+                    break;
+                case "orderByAscending":
+                    avQuery.orderByAscending(oneQuery.getString("arg1"));
+                    break;
+                case "orderByDescending":
+                    avQuery.orderByDescending(oneQuery.getString("arg1"));
+                    break;
+                case "addAscendingOrder":
+                    avQuery.addAscendingOrder(oneQuery.getString("arg1"));
+                    break;
+                case "addDescendingOrder":
+                    avQuery.addDescendingOrder(oneQuery.getString("arg1"));
+                    break;
+                case "limit":
+                    avQuery.limit(oneQuery.getIntValue("arg1"));
+                    break;
+                case "skip":
+                    avQuery.skip(oneQuery.getIntValue("arg1"));
                     break;
                 default:
                     result.error("params-error", "no such query queryMethod name, please check again", null);
