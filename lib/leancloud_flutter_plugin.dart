@@ -120,6 +120,12 @@ class LeancloudFlutterPlugin {
     var args = <String, String>{'cql': cql};
     return await _channel.invokeMethod('doCloudQuery', args);
   }
+
+  /// Get current User
+  Future<String> currentUser() async {
+    var currentUserJson = await _channel.invokeMethod('currentUser');
+    return currentUserJson;
+  }
 }
 
 /// Leancloud logger level

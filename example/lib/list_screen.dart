@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:leancloud_flutter_plugin/leancloud_object.dart';
 import 'package:leancloud_flutter_plugin/leancloud_query.dart';
 
+import 'user_screen.dart';
+
 class ListScreen extends StatefulWidget {
   @override
   _ListScreenState createState() => _ListScreenState();
@@ -120,6 +122,16 @@ class _ListScreenState extends State<ListScreen> {
               FlatButton(
                 onPressed: _queryByCQL,
                 child: Text('query by CQL'),
+              ),
+              Text('login function'),
+              FlatButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => UserScreen()),
+                  );
+                },
+                child: Text('LOGIN'),
               ),
             ],
           )
