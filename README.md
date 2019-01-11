@@ -16,7 +16,7 @@ This plugin depends on Leancloud Native(iOS / Android) SDK. It's just convert th
 * Add this to your package's pubspec.yaml file:
 ```
 dependencies:
-  leancloud_flutter_plugin: ^0.0.2
+  leancloud_flutter_plugin: ^0.0.3
 ```
 * Install packages from the command line:
 ```
