@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 
-import 'package:leancloud_flutter_plugin/leancloud_object.dart';
-import 'package:leancloud_flutter_plugin/leancloud_query.dart';
-import 'package:leancloud_flutter_plugin/leancloud_user.dart';
+import 'package:leancloud_flutter_plugin/src/leancloud_object.dart';
+import 'package:leancloud_flutter_plugin/src/leancloud_query.dart';
+import 'package:leancloud_flutter_plugin/src/leancloud_user.dart';
 
 /// Leancloud flutter Plugin
 class LeancloudFlutterPlugin {

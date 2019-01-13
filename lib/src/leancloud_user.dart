@@ -1,5 +1,5 @@
 import 'package:leancloud_flutter_plugin/leancloud_flutter_plugin.dart';
-import 'package:leancloud_flutter_plugin/leancloud_object.dart';
+import 'package:leancloud_flutter_plugin/src/leancloud_object.dart';
 
 class AVUser extends AVObject{
 
