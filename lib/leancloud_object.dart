@@ -12,15 +12,13 @@ class AVObject {
   /// Create an AVObject with Class Name
   AVObject(this._className);
 
-  /// Never call this function manually.
   /// This function used for AVQuery. It's convert from string to AVObject.
-  AVObject fromQuery(String queriedString) {
+  AVObject.fromQueryBackString(String queriedString) {
     var queriedFields = jsonDecode(queriedString);
     queriedFields.forEach((key, value) {
       if (key == "className") this._className = value;
       this.put(key, value);
     });
-    return this;
   }
 
   /// Add or Update field value with [value] into this Object by [key]
