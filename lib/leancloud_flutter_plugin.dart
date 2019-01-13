@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 
 import 'package:leancloud_flutter_plugin/leancloud_object.dart';
 import 'package:leancloud_flutter_plugin/leancloud_query.dart';
+import 'package:leancloud_flutter_plugin/leancloud_user.dart';
 
 /// Leancloud flutter Plugin
 class LeancloudFlutterPlugin {
@@ -87,6 +88,44 @@ class LeancloudFlutterPlugin {
       'region': regionValue,
     };
     _channel.invokeMethod('setRegion', args);
+  }
+
+  /// send SMS code by mobile number
+  void requestSMSCode(String mobileNumber) {
+    var args = <String, dynamic>{
+      'mobileNumber': mobileNumber,
+    };
+    _channel.invokeMethod('requestSMSCode', args);
+  }
+
+  /// sign up
+  /// Usually suggest using AVUser.signUp() function instead of this.
+  Future<dynamic> signUp(AVUser user) async {
+    var args = <String, dynamic>{'avUser': user.toString()};
+    var objectString = await _channel.invokeMethod('signUp', args);
+    if (this._logLevel != 0) {
+      print("[signUp function] -> " + objectString);
+    }
+    return objectString;
+  }
+
+  /// request Email verify
+  /// Usually suggest using AVUser.requestEmailVerify() function instead of this.
+  Future<bool> requestEmailVerify(String email) async {
+    var args = <String, dynamic>{
+      'email': email,
+    };
+    return await _channel.invokeMethod('requestEmailVerify', args);
+  }
+
+  /// sign up or login by mobile phone and sms code
+  /// Usually suggest using AVUser.signUpOrLoginByMobilePhone() function instead of this.
+  Future<dynamic> signUpOrLoginByMobilePhone(String mobileNumber, String smsCode) async {
+    var args = <String, dynamic>{
+      'mobileNumber': mobileNumber,
+      'smsCode': smsCode,
+    };
+    return await _channel.invokeMethod('signUpOrLoginByMobilePhone', args);
   }
 
   /// Save AVObject.

@@ -17,8 +17,7 @@ class AVQuery {
     var objectsJson = jsonDecode(objectsString);
     List<AVObject> lists = [];
     for (var objectString in objectsJson["objects"]) {
-      AVObject object = new AVObject("");
-      object.fromQuery(objectString);
+      var object = AVObject.fromQueryBackString(objectString);
       lists.add(object);
     }
     return lists;
@@ -41,9 +40,7 @@ class AVQuery {
     _setQueriesValue("get", objectId, null);
     var leancloudFlutterPlugin = LeancloudFlutterPlugin.getInstance();
     var objectString = await leancloudFlutterPlugin.query(this);
-    var object = new AVObject("");
-    object.fromQuery(objectString);
-    return object;
+    return AVObject.fromQueryBackString(objectString);
   }
 
   /// Find AVObjects with all conditions
@@ -53,8 +50,7 @@ class AVQuery {
     var objectsJson = jsonDecode(objectsString);
     List<AVObject> lists = [];
     for (var objectString in objectsJson["objects"]) {
-      AVObject object = new AVObject("");
-      object.fromQuery(objectString);
+      var object = AVObject.fromQueryBackString(objectString);
       lists.add(object);
     }
     return lists;
