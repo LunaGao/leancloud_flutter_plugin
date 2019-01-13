@@ -1,6 +1,7 @@
 # LeanCloud flutter plugin
 [![Bless](https://cdn.rawgit.com/LunaGao/BlessYourCodeTag/master/tags/god.svg)](http://lunagao.github.io/BlessYourCodeTag/)
 [![Package version](https://img.shields.io/badge/dynamic/json.svg?url=https://pub.dartlang.org/packages/leancloud_flutter_plugin.json&label=dart&query=$.versions[-1:]&colorB=blue)](https://shields.io/)
+[![Build Status](https://travis-ci.org/LunaGao/leancloud_flutter_plugin.svg?branch=dev)](https://travis-ci.org/LunaGao/leancloud_flutter_plugin)
 
 [Leancloud](https://leancloud.cn/) flutter plugin by Luna Gao
 
