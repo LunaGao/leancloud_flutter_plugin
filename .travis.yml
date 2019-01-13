@@ -1,4 +1,3 @@
-language: dart
 os: osx
 before_script:
   - git clone https://github.com/flutter/flutter.git
