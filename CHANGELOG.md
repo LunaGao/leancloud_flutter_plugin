@@ -1,3 +1,10 @@
+## 0.0.4
+
+* add
+    * username and password sign in
+    * username and password login
+* Fixed https://github.com/LunaGao/leancloud_flutter_plugin/issues/10
+
 ## 0.0.3
 
 * add query function
