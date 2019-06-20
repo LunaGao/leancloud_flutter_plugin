@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:leancloud_flutter_plugin/leancloud_object.dart';
-import 'package:leancloud_flutter_plugin/leancloud_query.dart';
+import 'package:leancloud_flutter_plugin/leancloud_flutter_plugin.dart';
 
 import 'user_screen.dart';
 

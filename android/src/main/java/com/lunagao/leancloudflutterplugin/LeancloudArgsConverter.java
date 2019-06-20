@@ -10,7 +10,18 @@ class LeancloudArgsConverter {
 
     static JSONObject getAVQueryJsonObject(MethodCall call, MethodChannel.Result result) {
         String key = "avQuery";
-        Object arg = call.argument("avQuery");
+        Object arg = call.argument(key);
+        if (arg == null) {
+            result.error("missing-arg", "Arg '" + key + "' can't be null, set empty value. PLEASE FIX IT!", null);
+            return null;
+        } else {
+            return JSON.parseObject(arg.toString());
+        }
+    }
+
+    static JSONObject getAVUserJsonObject(MethodCall call, MethodChannel.Result result) {
+        String key = "avUser";
+        Object arg = call.argument(key);
         if (arg == null) {
             result.error("missing-arg", "Arg '" + key + "' can't be null, set empty value. PLEASE FIX IT!", null);
             return null;

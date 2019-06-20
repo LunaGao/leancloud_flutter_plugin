@@ -1,7 +1,8 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:leancloud_flutter_plugin/leancloud_flutter_plugin.dart';
-import 'package:leancloud_flutter_plugin/leancloud_object.dart';
+import 'package:leancloud_flutter_plugin/src/leancloud_object.dart';
 
 class AVQuery {
 
@@ -58,7 +59,7 @@ class AVQuery {
 
   /// set query result limit count
   AVQuery limit(int limit) {
-    _setQueriesValue("limit", limit, null);
+    _setQueriesValue("limit", limit.toString(), null);
     return this;
   }
 
@@ -88,7 +89,7 @@ class AVQuery {
 
   /// set query result skip count
   AVQuery skip(int skip) {
-    _setQueriesValue("skip", skip, null);
+    _setQueriesValue("skip", skip.toString(), null);
     return this;
   }
 

@@ -1,5 +1,7 @@
+import 'dart:async';
+
 import 'package:leancloud_flutter_plugin/leancloud_flutter_plugin.dart';
-import 'package:leancloud_flutter_plugin/leancloud_object.dart';
+import 'package:leancloud_flutter_plugin/src/leancloud_object.dart';
 
 class AVUser extends AVObject{
 
@@ -29,7 +31,7 @@ class AVUser extends AVObject{
 
   /// set user name
   void setUsername(String userName) {
-    this.put("userName", userName);
+    this.put("username", userName);
   }
 
   /// set password
@@ -42,24 +44,33 @@ class AVUser extends AVObject{
     this.put("email", email);
   }
 
-  get getUsername {
-    super.get("userName");
+  String getUsername() {
+    return super.get("username");
   }
 
-  get getEmail {
-    super.get("email");
+  String getEmail() {
+    return super.get("email");
   }
 
-  Future<AVUser> save() async{
+  String getSessionToken() {
+    return super.get("sessionToken");
+  }
+
+  Future<AVUser> save() async {
     super.save();
     return this;
   }
 
-  void signUp() async{
+  Future<AVUser> signUp() async {
     var leancloudFlutterPlugin = LeancloudFlutterPlugin.getInstance();
     String queriedString = await leancloudFlutterPlugin.signUp(this);
-    //TODO need to check how to assign return value to itself.
-    AVUser.fromQueryBackString(queriedString);
+    return AVUser.fromQueryBackString(queriedString);
+  }
+
+  Future<AVUser> login() async {
+    var leancloudFlutterPlugin = LeancloudFlutterPlugin.getInstance();
+    String queriedString = await leancloudFlutterPlugin.login(this);
+    return AVUser.fromQueryBackString(queriedString);
   }
 
 

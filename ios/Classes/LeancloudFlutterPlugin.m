@@ -3,6 +3,7 @@
 #import "LeancloudFunction.h"
 #import "LeancloudObject.h"
 #import "LeancloudQuery.h"
+#import "LeancloudUser.h"
 
 @implementation LeancloudFlutterPlugin
 
@@ -35,6 +36,12 @@ LeancloudFunction *leancloudFunction;
     } else if ([@"query" isEqualToString:call.method]) {
         LeancloudQuery *leancloudQuery = [[LeancloudQuery alloc] init];
         [leancloudQuery query:call result:result];
+    } else if ([@"signUp" isEqualToString:call.method]) {
+        LeancloudUser *leancloudUser = [[LeancloudUser alloc] init];
+        [leancloudUser signin:call result:result];
+    } else if ([@"login" isEqualToString:call.method]) {
+        LeancloudUser *leancloudUser = [[LeancloudUser alloc] init];
+        [leancloudUser login:call result:result];
     } else {
         result(FlutterMethodNotImplemented);
     }
