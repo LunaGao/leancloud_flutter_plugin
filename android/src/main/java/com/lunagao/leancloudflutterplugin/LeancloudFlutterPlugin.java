@@ -48,6 +48,14 @@ public class LeancloudFlutterPlugin implements MethodCallHandler {
         LeancloudQuery doCloudQueryQuery = new LeancloudQuery();
         doCloudQueryQuery.doCloudQuery(call, result);
         break;
+      case "signUp":
+        LeancloudUser signUpLeancloudUser = new LeancloudUser();
+        signUpLeancloudUser.signUp(call, result);
+        break;
+      case "login":
+        LeancloudUser loginLeancloudUser = new LeancloudUser();
+        loginLeancloudUser.login(call, result);
+        break;
       default:
         result.notImplemented();
     }
