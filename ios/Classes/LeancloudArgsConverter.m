@@ -21,6 +21,18 @@
     }
 }
 
++ (NSDictionary*) getAVUserJsonObject:(FlutterMethodCall*)call result:(FlutterResult)result {
+    id arg = call.arguments[@"avUser"];
+    if (arg == nil) {
+        result([FlutterError errorWithCode:@"missing-arg"
+                                   message:@"Arg '%@' can't be null, set empty value. PLEASE FIX IT!"
+                                   details:nil]);
+        return nil;
+    } else {
+        return [LeancloudArgsConverter stringToJson:[NSString stringWithFormat:@"%@", arg]];
+    }
+}
+
 + (NSString*) getStringValue:(FlutterMethodCall*)call result:(FlutterResult)result key:(NSString*)key {
     id arg = call.arguments[key];
     if (arg == nil) {
