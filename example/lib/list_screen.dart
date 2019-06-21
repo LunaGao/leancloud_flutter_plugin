@@ -10,7 +10,6 @@ class ListScreen extends StatefulWidget {
 }
 
 class _ListScreenState extends State<ListScreen> {
-
   AVObject _theObject;
   String _queryObjectValue;
 
@@ -24,7 +23,7 @@ class _ListScreenState extends State<ListScreen> {
     object.save().then((object) {
       _theObject = object;
       print(object);
-      setState(() { });
+      setState(() {});
     });
   }
 
@@ -32,7 +31,7 @@ class _ListScreenState extends State<ListScreen> {
     _theObject.put("description", "updated!");
     _theObject.save().then((object) {
       print(object);
-      setState(() { });
+      setState(() {});
     });
   }
 
@@ -42,7 +41,7 @@ class _ListScreenState extends State<ListScreen> {
         print("Deleted!");
         _theObject = null;
         _queryObjectValue = null;
-        setState(() { });
+        setState(() {});
       }
     });
   }
@@ -52,7 +51,7 @@ class _ListScreenState extends State<ListScreen> {
     avQuery.get(_theObject.getObjectId()).then((object) {
       print("Queryed!");
       _queryObjectValue = object.getObjectId();
-      setState(() { });
+      setState(() {});
     });
   }
 
@@ -68,7 +67,7 @@ class _ListScreenState extends State<ListScreen> {
     avQuery.skip(1);
     avQuery.find().then((objects) {
       print("All Objects Queryed!");
-      setState(() { });
+      setState(() {});
     });
   }
 
@@ -83,58 +82,58 @@ class _ListScreenState extends State<ListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          appBar: AppBar(
-            title: const Text('Leancloud Plugin example app'),
-          ),
-          body: ListView(
-            shrinkWrap: true,
-            padding: const EdgeInsets.all(20.0),
-            children: <Widget>[
-              Text(_theObject == null
-                  ? "Please click 'create an Object' button"
-                  : (_theObject.get("description") == null
-                  ? "ERROR" : _theObject.get("description"))),
-              FlatButton(
-                onPressed: _createAnObject,
-                child: Text('create an Object'),
-              ),
-              FlatButton(
-                onPressed: _updateObject,
-                child: Text('update the Object'),
-              ),
-              FlatButton(
-                onPressed: _deleteObject,
-                child: Text('delete the Object'),
-              ),
-              Text(_theObject == null
-                  ? "Please click 'create an Object' button first"
-                  : (_queryObjectValue == null
-                  ? "click the 'query the Object' button" : _queryObjectValue)),
-              FlatButton(
-                onPressed: _queryObject,
-                child: Text('query the Object'),
-              ),
-              FlatButton(
-                onPressed: _queryAllObject,
-                child: Text('query all Objects'),
-              ),
-              FlatButton(
-                onPressed: _queryByCQL,
-                child: Text('query by CQL'),
-              ),
-              Text('login function'),
-              FlatButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => UserScreen()),
-                  );
-                },
-                child: Text('LOGIN'),
-              ),
-            ],
-          )
-    );
+        appBar: AppBar(
+          title: const Text('Leancloud Plugin example app'),
+        ),
+        body: ListView(
+          shrinkWrap: true,
+          padding: const EdgeInsets.all(20.0),
+          children: <Widget>[
+            Text(_theObject == null
+                ? "Please click 'create an Object' button"
+                : (_theObject.get("description") == null
+                    ? "ERROR"
+                    : _theObject.get("description"))),
+            FlatButton(
+              onPressed: _createAnObject,
+              child: Text('create an Object'),
+            ),
+            FlatButton(
+              onPressed: _updateObject,
+              child: Text('update the Object'),
+            ),
+            FlatButton(
+              onPressed: _deleteObject,
+              child: Text('delete the Object'),
+            ),
+            Text(_theObject == null
+                ? "Please click 'create an Object' button first"
+                : (_queryObjectValue == null
+                    ? "click the 'query the Object' button"
+                    : _queryObjectValue)),
+            FlatButton(
+              onPressed: _queryObject,
+              child: Text('query the Object'),
+            ),
+            FlatButton(
+              onPressed: _queryAllObject,
+              child: Text('query all Objects'),
+            ),
+            FlatButton(
+              onPressed: _queryByCQL,
+              child: Text('query by CQL'),
+            ),
+            Text('login function'),
+            FlatButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => UserScreen()),
+                );
+              },
+              child: Text('LOGIN'),
+            ),
+          ],
+        ));
   }
-
 }

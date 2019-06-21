@@ -125,4 +125,12 @@ avQuery.find().then((objects) {
 
 [Example App README.md](https://github.com/LunaGao/leancloud_flutter_plugin/blob/master/example/README.md)
 
+## Publish Plugin
 
+```
+cd PROJECT_PATH
+flutter format .
+flutter pub pub publish --dry-run
+flutter pub pub publish
+
+```

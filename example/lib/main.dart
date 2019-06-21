@@ -9,7 +9,8 @@ void main() {
 }
 
 void initPlatformState() {
-  LeancloudFlutterPlugin leancloudFlutterPlugin = LeancloudFlutterPlugin.getInstance();
+  LeancloudFlutterPlugin leancloudFlutterPlugin =
+      LeancloudFlutterPlugin.getInstance();
   String appId = "YOUR_APP_ID";
   String appKey = "YOUR_APP_KEY";
   leancloudFlutterPlugin.setLogLevel(LeancloudLoggerLevel.DEBUG);
@@ -23,7 +24,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

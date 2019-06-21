@@ -10,10 +10,9 @@ import 'package:leancloud_flutter_plugin/src/leancloud_enum.dart';
 
 /// Leancloud flutter Plugin
 class LeancloudFlutterPlugin {
-
   /// method channel
   static const MethodChannel _channel =
-  const MethodChannel('leancloud_flutter_plugin');
+      const MethodChannel('leancloud_flutter_plugin');
 
   /// Singleton property
   static LeancloudFlutterPlugin _instancePlugin = new LeancloudFlutterPlugin();
@@ -133,7 +132,8 @@ class LeancloudFlutterPlugin {
 
   /// sign up or login by mobile phone and sms code
   /// Usually suggest using AVUser.signUpOrLoginByMobilePhone() function instead of this.
-  Future<dynamic> signUpOrLoginByMobilePhone(String mobileNumber, String smsCode) async {
+  Future<dynamic> signUpOrLoginByMobilePhone(
+      String mobileNumber, String smsCode) async {
     var args = <String, dynamic>{
       'mobileNumber': mobileNumber,
       'smsCode': smsCode,

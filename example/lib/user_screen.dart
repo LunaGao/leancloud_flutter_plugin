@@ -8,7 +8,6 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
-
   TextEditingController _userNameTextFieldController = TextEditingController();
   TextEditingController _passwordTextFieldController = TextEditingController();
   String signSessionToken = "";
@@ -21,7 +20,7 @@ class _UserScreenState extends State<UserScreen> {
     avUser.signUp().then((object) {
       avUser = object;
       signSessionToken = avUser.getSessionToken();
-      setState(() { });
+      setState(() {});
     });
   }
 
@@ -32,7 +31,7 @@ class _UserScreenState extends State<UserScreen> {
     avUser.login().then((object) {
       avUser = object;
       loginSessionToken = avUser.getSessionToken();
-      setState(() { });
+      setState(() {});
     });
   }
 
@@ -49,16 +48,12 @@ class _UserScreenState extends State<UserScreen> {
             TextField(
               controller: _userNameTextFieldController,
               decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Enter a username'
-              ),
+                  border: InputBorder.none, hintText: 'Enter a username'),
             ),
             TextField(
               controller: _passwordTextFieldController,
               decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Enter a password'
-              ),
+                  border: InputBorder.none, hintText: 'Enter a password'),
             ),
             FlatButton(
               onPressed: _signin,
@@ -71,7 +66,6 @@ class _UserScreenState extends State<UserScreen> {
             Text("Sign in Session Token: " + signSessionToken),
             Text("Login in Session Token: " + loginSessionToken),
           ],
-        )
-    );
+        ));
   }
 }
