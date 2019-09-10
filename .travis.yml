@@ -3,4 +3,7 @@ before_script:
   - git clone https://github.com/flutter/flutter.git
   - ./flutter/bin/flutter doctor
 script:
+  - echo "$appId"
+  - echo "$appKey"
+  - echo "$LeancloudOSServiceValue"
   - ./flutter/bin/flutter test
