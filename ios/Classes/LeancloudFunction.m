@@ -20,6 +20,27 @@ BOOL isEnable;
     return self;
 }
 
+- (void) setServer:(FlutterMethodCall*)call result:(FlutterResult)result {
+    int apiOSServiceType = [LeancloudArgsConverter getIntValue:call result:result key:@"OSService"];
+    NSString *url = [LeancloudArgsConverter getStringValue:call result:result key:@"value"];
+    AVServiceModule avServiceModule;
+    switch (apiOSServiceType) {
+        case 1:
+            avServiceModule = AVServiceModuleEngine;
+            break;
+        case 2:
+            avServiceModule = AVServiceModulePush;
+            break;
+        case 3:
+            avServiceModule = AVServiceModuleRTM;
+            break;
+        default:
+            avServiceModule = AVServiceModuleAPI;
+            break;
+    }
+    [AVOSCloud setServerURLString:url forServiceModule:avServiceModule];
+}
+
 - (void) initialize:(FlutterMethodCall*)call result:(FlutterResult)result {
     NSString *appId = [LeancloudArgsConverter getStringValue:call result:result key:@"appId"];
     NSString *appKey = [LeancloudArgsConverter getStringValue:call result:result key:@"appKey"];

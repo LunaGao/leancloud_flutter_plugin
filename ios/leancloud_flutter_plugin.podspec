@@ -18,6 +18,6 @@ LeanCloud flutter plugin by Luna Gao
 
   s.ios.deployment_target = '8.0'
 
-  s.dependency 'AVOSCloud', '~> 11.4.9'
+  s.dependency 'AVOSCloud', '~> 11.6.6'
 end
 

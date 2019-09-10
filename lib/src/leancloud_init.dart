@@ -24,6 +24,32 @@ class LeancloudFlutterPlugin {
 
   var _logLevel = 0;
 
+  /// Setup Server domain must be before called initialize function
+  /// Set Server domain
+  /// [service]
+  void setServer(LeancloudOSService service, String serviceUrl) {
+    var serviceIndex = 0;
+    switch(service) {
+      case LeancloudOSService.API:
+        serviceIndex = 0;
+        break;
+      case LeancloudOSService.ENGINE:
+        serviceIndex = 1;
+        break;
+      case LeancloudOSService.PUSH:
+        serviceIndex = 2;
+        break;
+      case LeancloudOSService.RTM:
+        serviceIndex = 3;
+        break;
+    }
+    var args = <String, dynamic>{
+      'OSService': serviceIndex,
+      'value': serviceUrl,
+    };
+    _channel.invokeMethod('setServer', args);
+  }
+
   /// Initialize the Native SDK
   void initialize(String appId, String appKey) {
     var args = <String, dynamic>{

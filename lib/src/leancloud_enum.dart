@@ -5,3 +5,6 @@ enum LeancloudLoggerLevel { OFF, ERROR, WARNING, INFO, DEBUG, VERBOSE, ALL }
 /// Leancloud Region
 /// iOS not have this property
 enum LeancloudCloudRegion { NorthChina, EastChina, NorthAmerica }
+
+/// Leancloud AVOSService
+enum LeancloudOSService { API, ENGINE, PUSH, RTM }

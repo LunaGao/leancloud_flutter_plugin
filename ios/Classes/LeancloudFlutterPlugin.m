@@ -20,7 +20,9 @@ LeancloudFunction *leancloudFunction;
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
     
-    if ([@"initialize" isEqualToString:call.method]) {
+    if ([@"setServer" isEqualToString:call.method]) {
+        [leancloudFunction setServer:call result:result];
+    } else if ([@"initialize" isEqualToString:call.method]) {
         [leancloudFunction initialize:call result:result];
     } else if ([@"setLogLevel" isEqualToString:call.method]) {
         [leancloudFunction setAllLogsEnabled:call result:result];
