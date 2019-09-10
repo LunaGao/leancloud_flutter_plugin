@@ -72,7 +72,7 @@ class _ListScreenState extends State<ListScreen> {
   }
 
   _queryByCQL() {
-    var cql = "select * from DemoObject where int_value = 20";
+    var cql = "select * from DemoObject";
     AVQuery.doCloudQuery(cql).then((objects) {
       print(objects);
       print("Queryed!");
