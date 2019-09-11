@@ -29,7 +29,7 @@ class LeancloudFlutterPlugin {
   /// [service]
   void setServer(LeancloudOSService service, String serviceUrl) {
     var serviceIndex = 0;
-    switch(service) {
+    switch (service) {
       case LeancloudOSService.API:
         serviceIndex = 0;
         break;

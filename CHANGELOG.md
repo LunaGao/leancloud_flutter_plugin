@@ -1,3 +1,9 @@
+## 0.0.5
+* add
+    * cql query
+    * domain function
+    * return error code when throw leancloud error
+
 ## 0.0.4
 
 * add
