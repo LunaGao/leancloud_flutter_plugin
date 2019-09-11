@@ -3,7 +3,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'leancloud_flutter_plugin'
-  s.version          = '0.0.1'
+  s.version          = '0.0.2'
   s.summary          = 'LeanCloud flutter plugin by Luna Gao'
   s.description      = 'LeanCloud flutter plugin by Luna Gao'
   s.homepage         = 'http://example.com'
@@ -15,6 +15,6 @@ Pod::Spec.new do |s|
   s.dependency 'Flutter'
 
   s.ios.deployment_target = '8.0'
-  s.dependency 'AVOSCloud', '~> 11.6.6'
+  s.dependency 'AVOSCloud', '~> 11.6.2'
 end
 
