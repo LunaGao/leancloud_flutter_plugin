@@ -64,9 +64,10 @@ const NSString *ARG2 = @"arg2";
     }
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error != nil) {
+            NSNumber *errorCode = [NSNumber numberWithInteger:[error code]];
             result([FlutterError errorWithCode:@"leancloud-error"
-                                       message:[error localizedDescription]
-                                       details:[error localizedFailureReason]]);
+                                       message:[error localizedFailureReason]
+                                       details:errorCode]);
         } else {
             NSMutableArray *array = [[NSMutableArray alloc] init];
             for (AVObject *object in objects) {
@@ -91,9 +92,10 @@ const NSString *ARG2 = @"arg2";
     NSError *error;
     AVCloudQueryResult *queryResult = [AVQuery doCloudQueryWithCQL:cqlString error:&error];
     if (error != nil) {
+        NSNumber *errorCode = [NSNumber numberWithInteger:[error code]];
         result([FlutterError errorWithCode:@"leancloud-error"
-                                   message:[error localizedDescription]
-                                   details:[error localizedFailureReason]]);
+                                   message:[error localizedFailureReason]
+                                   details:errorCode]);
     } else {
         NSMutableArray *array = [[NSMutableArray alloc] init];
         for (AVObject *object in queryResult.results) {

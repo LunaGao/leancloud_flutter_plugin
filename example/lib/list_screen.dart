@@ -68,6 +68,8 @@ class _ListScreenState extends State<ListScreen> {
     avQuery.find().then((objects) {
       print("All Objects Queryed!");
       setState(() {});
+    }).catchError((error) {
+      print(error);
     });
   }
 
@@ -76,6 +78,8 @@ class _ListScreenState extends State<ListScreen> {
     AVQuery.doCloudQuery(cql).then((objects) {
       print(objects);
       print("Queryed!");
+    }).catchError((error) {
+      print(error);
     });
   }
 

@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.util.List;
 
+import cn.leancloud.AVException;
 import cn.leancloud.AVObject;
 import cn.leancloud.types.AVNull;
 import io.flutter.plugin.common.MethodCall;
@@ -34,7 +35,9 @@ class LeancloudObject {
 
             @Override
             public void onError(Throwable throwable) {
-                result.error("leancloud-error", throwable.getMessage(), null);
+                AVException avException = new AVException(throwable);
+                int code = avException.getCode();
+                result.error("leancloud-error", throwable.getMessage(), code);
             }
 
             @Override
@@ -65,7 +68,9 @@ class LeancloudObject {
 
                 @Override
                 public void onError(Throwable throwable) {
-                    result.error("leancloud-error", throwable.getMessage(), null);
+                    AVException avException = new AVException(throwable);
+                    int code = avException.getCode();
+                    result.error("leancloud-error", throwable.getMessage(), code);
                 }
 
                 @Override
