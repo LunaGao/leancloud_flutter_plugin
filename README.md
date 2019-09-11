@@ -17,7 +17,7 @@ This plugin depends on Leancloud Native(iOS / Android) SDK. It's just convert th
 * Add this to your package's pubspec.yaml file:
 ```
 dependencies:
-  leancloud_flutter_plugin: ^0.0.4
+  leancloud_flutter_plugin: ^0.0.5
 ```
 * Install packages from the command line:
 ```
@@ -125,4 +125,12 @@ avQuery.find().then((objects) {
 
 [Example App README.md](https://github.com/LunaGao/leancloud_flutter_plugin/blob/master/example/README.md)
 
+## Publish Plugin
 
+```
+cd PROJECT_PATH
+flutter format .
+flutter pub pub publish --dry-run
+flutter pub pub publish
+
+```

@@ -4,10 +4,42 @@ import android.content.Context;
 
 import cn.leancloud.AVLogger;
 import cn.leancloud.AVOSCloud;
+import cn.leancloud.core.AVOSService;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 
 class LeancloudFunction {
+
+    /**
+     * initialize function
+     *
+     * The call must be include args:
+     *  appId
+     *  appKey
+     *
+     * @param call MethodCall from LeancloudFlutterPlugin.onMethodCall function
+     * @param result MethodChannel.Result from LeancloudFlutterPlugin.onMethodCall function
+     */
+    static void setServer(MethodCall call, MethodChannel.Result result) {
+        int apiOSServiceType = LeancloudArgsConverter.getIntValue(call, result, "OSService");
+        String url = LeancloudArgsConverter.getStringValue(call, result, "value");
+        AVOSService avosService;
+        switch (apiOSServiceType) {
+            case 1:
+                avosService = AVOSService.ENGINE;
+                break;
+            case 2:
+                avosService = AVOSService.PUSH;
+                break;
+            case 3:
+                avosService = AVOSService.RTM;
+                break;
+            default:
+                avosService = AVOSService.API;
+                break;
+        }
+        AVOSCloud.setServer(avosService, url);
+    }
 
     /**
      * initialize function

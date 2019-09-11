@@ -3,17 +3,19 @@ import 'dart:async';
 import 'package:leancloud_flutter_plugin/leancloud_flutter_plugin.dart';
 import 'package:leancloud_flutter_plugin/src/leancloud_object.dart';
 
-class AVUser extends AVObject{
-
+class AVUser extends AVObject {
   AVUser() : super("_User");
 
   /// This function used for AVQuery. It's convert from string to AVUser.
-  AVUser.fromQueryBackString(String queriedString) : super.fromQueryBackString(queriedString);
+  AVUser.fromQueryBackString(String queriedString)
+      : super.fromQueryBackString(queriedString);
 
   ///
-  static Future<AVUser> signUpOrLoginByMobilePhone(String mobileNumber, String smsCode) async {
+  static Future<AVUser> signUpOrLoginByMobilePhone(
+      String mobileNumber, String smsCode) async {
     var leancloudFlutterPlugin = LeancloudFlutterPlugin.getInstance();
-    String queriedString = await leancloudFlutterPlugin.signUpOrLoginByMobilePhone(mobileNumber, smsCode);
+    String queriedString = await leancloudFlutterPlugin
+        .signUpOrLoginByMobilePhone(mobileNumber, smsCode);
     return AVUser.fromQueryBackString(queriedString);
   }
 
@@ -72,7 +74,6 @@ class AVUser extends AVObject{
     String queriedString = await leancloudFlutterPlugin.login(this);
     return AVUser.fromQueryBackString(queriedString);
   }
-
 
 //  AVUser currentUser() {
 //    var leancloudFlutterPlugin = LeancloudFlutterPlugin.getInstance();

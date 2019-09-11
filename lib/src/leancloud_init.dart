@@ -10,10 +10,9 @@ import 'package:leancloud_flutter_plugin/src/leancloud_enum.dart';
 
 /// Leancloud flutter Plugin
 class LeancloudFlutterPlugin {
-
   /// method channel
   static const MethodChannel _channel =
-  const MethodChannel('leancloud_flutter_plugin');
+      const MethodChannel('leancloud_flutter_plugin');
 
   /// Singleton property
   static LeancloudFlutterPlugin _instancePlugin = new LeancloudFlutterPlugin();
@@ -24,6 +23,32 @@ class LeancloudFlutterPlugin {
   }
 
   var _logLevel = 0;
+
+  /// Setup Server domain must be before called initialize function
+  /// Set Server domain
+  /// [service]
+  void setServer(LeancloudOSService service, String serviceUrl) {
+    var serviceIndex = 0;
+    switch (service) {
+      case LeancloudOSService.API:
+        serviceIndex = 0;
+        break;
+      case LeancloudOSService.ENGINE:
+        serviceIndex = 1;
+        break;
+      case LeancloudOSService.PUSH:
+        serviceIndex = 2;
+        break;
+      case LeancloudOSService.RTM:
+        serviceIndex = 3;
+        break;
+    }
+    var args = <String, dynamic>{
+      'OSService': serviceIndex,
+      'value': serviceUrl,
+    };
+    _channel.invokeMethod('setServer', args);
+  }
 
   /// Initialize the Native SDK
   void initialize(String appId, String appKey) {
@@ -133,7 +158,8 @@ class LeancloudFlutterPlugin {
 
   /// sign up or login by mobile phone and sms code
   /// Usually suggest using AVUser.signUpOrLoginByMobilePhone() function instead of this.
-  Future<dynamic> signUpOrLoginByMobilePhone(String mobileNumber, String smsCode) async {
+  Future<dynamic> signUpOrLoginByMobilePhone(
+      String mobileNumber, String smsCode) async {
     var args = <String, dynamic>{
       'mobileNumber': mobileNumber,
       'smsCode': smsCode,

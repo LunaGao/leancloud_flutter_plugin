@@ -23,6 +23,9 @@ public class LeancloudFlutterPlugin implements MethodCallHandler {
   @Override
   public void onMethodCall(MethodCall call, Result result) {
     switch (call.method) {
+      case "setServer":
+        LeancloudFunction.setServer(call, result);
+        break;
       case "initialize":
         LeancloudFunction.initialize(call, result, _applicationContext);
         break;

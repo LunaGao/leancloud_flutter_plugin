@@ -4,9 +4,9 @@ import 'dart:convert';
 import 'package:leancloud_flutter_plugin/leancloud_flutter_plugin.dart';
 
 class AVObject {
-
   /// private property for Class Name
   var _className;
+
   /// private property for Class Fields
   var _fields = {};
 
@@ -40,7 +40,8 @@ class AVObject {
   /// Overwritten toString() function, to return this object's JSON string.
   String toString() {
     if (this._fields.isEmpty) {
-      throw Exception("Empty field, before save or create, you must to add field! Using put() function.");
+      throw Exception(
+          "Empty field, before save or create, you must to add field! Using put() function.");
     }
     var fieldsString = jsonEncode(this._fields);
     var object = {};

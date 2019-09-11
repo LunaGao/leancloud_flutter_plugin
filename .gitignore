@@ -1,2 +1,4 @@
 .idea
 .packages
+build
+flutter_export_environment.sh

@@ -3,4 +3,7 @@ before_script:
   - git clone https://github.com/flutter/flutter.git
   - ./flutter/bin/flutter doctor
 script:
+  - sed -i '' "s+#LeancloudOSService#+$LeancloudOSServiceValue+g" test/leancloud_flutter_plugin_test.dart
+  - sed -i '' "s+#appKey#+$appKey+g" test/leancloud_flutter_plugin_test.dart
+  - sed -i '' "s+#appId#+$appId+g" test/leancloud_flutter_plugin_test.dart
   - ./flutter/bin/flutter test

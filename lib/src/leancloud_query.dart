@@ -5,9 +5,9 @@ import 'package:leancloud_flutter_plugin/leancloud_flutter_plugin.dart';
 import 'package:leancloud_flutter_plugin/src/leancloud_object.dart';
 
 class AVQuery {
-
   /// private property for Class Name
   var _className;
+
   /// private property for query conditions
   var _queries = [];
 
@@ -59,7 +59,7 @@ class AVQuery {
 
   /// set query result limit count
   AVQuery limit(int limit) {
-    _setQueriesValue("limit", limit.toString(), null);
+    _setQueriesValue("limit", limit, null);
     return this;
   }
 
@@ -89,7 +89,7 @@ class AVQuery {
 
   /// set query result skip count
   AVQuery skip(int skip) {
-    _setQueriesValue("skip", skip.toString(), null);
+    _setQueriesValue("skip", skip, null);
     return this;
   }
 
@@ -131,7 +131,7 @@ class AVQuery {
 
   /// Private function, set conditions json value
   _setQueriesValue(String queryMethod, dynamic arg1, dynamic arg2) {
-    var queryClass = <String, String>{};
+    var queryClass = <String, dynamic>{};
     queryClass.addAll({"queryMethod": queryMethod});
     queryClass.addAll({"arg1": arg1});
     if (arg2 != null) {

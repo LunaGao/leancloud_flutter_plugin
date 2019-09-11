@@ -3,11 +3,9 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'leancloud_flutter_plugin'
-  s.version          = '0.0.1'
+  s.version          = '0.0.2'
   s.summary          = 'LeanCloud flutter plugin by Luna Gao'
-  s.description      = <<-DESC
-LeanCloud flutter plugin by Luna Gao
-                       DESC
+  s.description      = 'LeanCloud flutter plugin by Luna Gao'
   s.homepage         = 'http://example.com'
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Your Company' => 'email@example.com' }
@@ -17,7 +15,6 @@ LeanCloud flutter plugin by Luna Gao
   s.dependency 'Flutter'
 
   s.ios.deployment_target = '8.0'
-
-  s.dependency 'AVOSCloud', '~> 11.4.9'
+  s.dependency 'AVOSCloud', '~> 11.6.2'
 end
 

@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LeancloudFunction : NSObject
 
 - (id) init;
+- (void) setServer:(FlutterMethodCall*)call result:(FlutterResult)result;
 - (void) initialize:(FlutterMethodCall*)call result:(FlutterResult)result;
 - (void) setAllLogsEnabled:(FlutterMethodCall*)call result:(FlutterResult)result;
 

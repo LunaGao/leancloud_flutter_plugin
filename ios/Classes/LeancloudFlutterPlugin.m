@@ -20,7 +20,9 @@ LeancloudFunction *leancloudFunction;
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
     
-    if ([@"initialize" isEqualToString:call.method]) {
+    if ([@"setServer" isEqualToString:call.method]) {
+        [leancloudFunction setServer:call result:result];
+    } else if ([@"initialize" isEqualToString:call.method]) {
         [leancloudFunction initialize:call result:result];
     } else if ([@"setLogLevel" isEqualToString:call.method]) {
         [leancloudFunction setAllLogsEnabled:call result:result];
@@ -36,6 +38,9 @@ LeancloudFunction *leancloudFunction;
     } else if ([@"query" isEqualToString:call.method]) {
         LeancloudQuery *leancloudQuery = [[LeancloudQuery alloc] init];
         [leancloudQuery query:call result:result];
+    } else if ([@"doCloudQuery" isEqualToString:call.method]) {
+        LeancloudQuery *leancloudQuery = [[LeancloudQuery alloc] init];
+        [leancloudQuery doCloudQuery:call result:result];
     } else if ([@"signUp" isEqualToString:call.method]) {
         LeancloudUser *leancloudUser = [[LeancloudUser alloc] init];
         [leancloudUser signin:call result:result];

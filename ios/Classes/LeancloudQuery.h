@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LeancloudQuery : NSObject
 
 - (void) query:(FlutterMethodCall*)call result:(FlutterResult)result;
+- (void) doCloudQuery:(FlutterMethodCall*)call result:(FlutterResult)result;
 
 @end
 

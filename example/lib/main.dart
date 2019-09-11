@@ -9,11 +9,13 @@ void main() {
 }
 
 void initPlatformState() {
-  LeancloudFlutterPlugin leancloudFlutterPlugin = LeancloudFlutterPlugin.getInstance();
-  String appId = "YOUR_APP_ID";
-  String appKey = "YOUR_APP_KEY";
+  LeancloudFlutterPlugin leancloudFlutterPlugin =
+      LeancloudFlutterPlugin.getInstance();
+  String appId = "";
+  String appKey = "";
   leancloudFlutterPlugin.setLogLevel(LeancloudLoggerLevel.DEBUG);
   leancloudFlutterPlugin.setRegion(LeancloudCloudRegion.NorthChina);
+  leancloudFlutterPlugin.setServer(LeancloudOSService.API, "");
   leancloudFlutterPlugin.initialize(appId, appKey);
 }
 
@@ -23,7 +25,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

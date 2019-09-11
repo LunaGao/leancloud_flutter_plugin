@@ -27,9 +27,10 @@
             NSString *jsonString = serializedString;
             result(jsonString);
         } else {
+            NSNumber *errorCode = [NSNumber numberWithInteger:[error code]];
             result([FlutterError errorWithCode:@"leancloud-error"
-                                       message:[error localizedDescription]
-                                       details:[error localizedFailureReason]]);
+                                       message:[error localizedFailureReason]
+                                       details:errorCode]);
         }
     }];
 }
@@ -47,9 +48,10 @@
             NSString *jsonString = serializedString;
             result(jsonString);
         } else {
+            NSNumber *errorCode = [NSNumber numberWithInteger:[error code]];
             result([FlutterError errorWithCode:@"leancloud-error"
-                                       message:[error localizedDescription]
-                                       details:[error localizedFailureReason]]);
+                                       message:[error localizedFailureReason]
+                                       details:errorCode]);
         }
     }];
 }
