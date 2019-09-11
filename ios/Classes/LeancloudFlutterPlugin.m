@@ -38,6 +38,9 @@ LeancloudFunction *leancloudFunction;
     } else if ([@"query" isEqualToString:call.method]) {
         LeancloudQuery *leancloudQuery = [[LeancloudQuery alloc] init];
         [leancloudQuery query:call result:result];
+    } else if ([@"doCloudQuery" isEqualToString:call.method]) {
+        LeancloudQuery *leancloudQuery = [[LeancloudQuery alloc] init];
+        [leancloudQuery doCloudQuery:call result:result];
     } else if ([@"signUp" isEqualToString:call.method]) {
         LeancloudUser *leancloudUser = [[LeancloudUser alloc] init];
         [leancloudUser signin:call result:result];

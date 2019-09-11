@@ -22,8 +22,8 @@ const NSString *ARG2 = @"arg2";
     NSDictionary *queriesJson = [LeancloudArgsConverter stringToJson:queriesString];
     AVQuery *query = [AVQuery queryWithClassName:className];
     for (NSDictionary *oneQuery in queriesJson) {
-        if([oneQuery[@"queryMethod"] isEqualToString:@"get"]) { // if has getObjectWithId function
-            [query getObjectInBackgroundWithId:oneQuery[@"arg1"] block:^(AVObject *object, NSError *error) {
+        if([oneQuery[QUERYMETHOD] isEqualToString:@"get"]) { // if has getObjectWithId function
+            [query getObjectInBackgroundWithId:oneQuery[ARG1] block:^(AVObject *object, NSError *error) {
                 NSMutableDictionary *serializedJSONDictionary = [object dictionaryForObject];
                 NSError *err;
                 NSData *jsonData = [NSJSONSerialization dataWithJSONObject:serializedJSONDictionary options:0 error:&err];
@@ -84,6 +84,32 @@ const NSString *ARG2 = @"arg2";
             result(jsonString);
         }
     }];
+}
+
+- (void) doCloudQuery:(FlutterMethodCall*)call result:(FlutterResult)result {
+    NSString *cqlString = [LeancloudArgsConverter getStringValue:call result:result key:@"cql"];
+    NSError *error;
+    AVCloudQueryResult *queryResult = [AVQuery doCloudQueryWithCQL:cqlString error:&error];
+    if (error != nil) {
+        result([FlutterError errorWithCode:@"leancloud-error"
+                                   message:[error localizedDescription]
+                                   details:[error localizedFailureReason]]);
+    } else {
+        NSMutableArray *array = [[NSMutableArray alloc] init];
+        for (AVObject *object in queryResult.results) {
+            NSMutableDictionary *serializedJSONDictionary = [object dictionaryForObject];
+            NSError *err;
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:serializedJSONDictionary options:0 error:&err];
+            NSString *serializedString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            [array addObject:serializedString];
+        }
+        NSDictionary *jsonDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                        array, @"objects",
+                                        nil];
+        NSData* jsonData =[NSJSONSerialization dataWithJSONObject:jsonDictionary options:NSJSONWritingPrettyPrinted error:&error];
+        NSString* jsonString =[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        result(jsonString);
+    }
 }
 
 @end

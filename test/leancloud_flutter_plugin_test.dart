@@ -1,8 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:test/test.dart';
 import 'package:leancloud_flutter_plugin/leancloud_flutter_plugin.dart';
 
 void main() {
-  test('my first unit test', () {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  test('unit test', () {
     var lfp = LeancloudFlutterPlugin.getInstance();
     lfp.setServer(LeancloudOSService.API, "#LeancloudOSService#");
     lfp.initialize("#appId#", "#appKey#");
